@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css"    href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css"></link>
+<link rel="stylesheet" href="../static/css/style.css">
+<title>Puslapis</title>
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+<!-- Prisijungimas -->
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="loginModalLabel">Prisijungti</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-outline mb-4" style="margin-bottom: 0px !important">
+                    <label for="loginMail">E-paštas</label>
+                    <input type="Mail" id="loginMail" class="form-control"/>
+                    <label for="loginPassword">Slaptažodis</label>
+                    <input type="password" id="loginPassword" class="form-control"/>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">Prisijungti</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Atgal</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Registracija -->
+<div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="registerModalLabel">Registruotis</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-6" style="padding-left:0px">
+                            <label for="registerName">Vardas</label>
+                            <input type="text" id="registerName" class="form-control"/>
+                        </div>
+                        <div class="col-lg-6" style="padding-right:0px">
+                            <label for="registerLastname">Pavardė</label>
+                            <input type="text" id="registerLastname" class="form-control"/>
+                        </div>
+                    </div>
+                    <label for="registerAddress">Adresas</label>
+                    <input type="text" id="registerAddress" class="form-control"/>
+                    <label for="registerMail">E-paštas</label>
+                    <input type="Mail" id="registerMail" class="form-control"/>
+                    <label for="registerPassword">Slaptažodis</label>
+                    <input type="password" id="registerPassword" class="form-control"/>
+                    <label>Rolė rinkoje</label>
+                    <div class="row justify-content-lg-center">
+                        <div class="checkBox">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Gamintojas
+                            </label>
+                        </div>
+                        <div class="checkBox">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Vartotojas
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">Registruotis</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Atgal</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+<nav class="navbar navbar-expand navbar-dark bg-primary fixed-top">
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <button type="button" class="btn btn-primary">
+                    Apie mus
+                </button>
+            </li>
+            <li class="nav-item">
+                <button type="button" class="btn btn-primary">
+                    DUK
+                </button>
+            </li>
+        </ul>
+    </div>
+    <div>
+         <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">
+                    Prisijungti
+                </button>
+            </li>
+            <li class="nav-item">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#registerModal">
+                    Registruotis
+                </button>
+            </li>
+        </ul>
+    </div>
+</nav>
+</div>
+
+<div id="Apie_mus" class="row justify-content-lg-center">
+    <h1>Apie mus</h1>
+    <div class="row justify-content-lg-center">
+        <div class="col col-lg-6">
+            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
+        </div>
+        <div class="col col-lg-2">
+            <img class="otherImage" src="../static/images/tower.jfif" alt="Avatar">
+        </div>
+    </div>
+</div>
+
+
+<footer class="mt-auto bg-primary">
+
+  <div class="container-fluid text-center text-md-left">
+
+    <div class="row">
+
+      <div class="col-md-6 mt-md-0 mt-3">
+
+        <h5 class="text-uppercase font-weight-bold">Footer tekstas</h5>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Expedita sapiente sint, nulla, nihil
+          repudiandae commodi voluptatibus corrupti animi sequi aliquid magnam debitis, maxime quam recusandae
+          harum esse fugiat. Itaque, culpa?</p>
+
+      </div>
+
+      <hr class="clearfix w-100 d-md-none pb-3">
+
+      <div class="col-md-6 mb-md-0 mb-3">
+
+        <h5 class="text-uppercase font-weight-bold">Kontaktai</h5>
+        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Optio deserunt fuga perferendis modi earum
+          commodi aperiam temporibus quod nulla nesciunt aliquid debitis ullam omnis quos ipsam, aspernatur id
+          excepturi hic.</p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</footer>
+
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</html>
