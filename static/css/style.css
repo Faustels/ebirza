@@ -1,0 +1,49 @@
+body {
+    padding:80px 0px 0px 0px;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+footer{
+    padding: 20px 0px;
+    color:white;
+}
+
+h4{
+    padding:10px;
+}
+
+.userImage {
+    border-radius: 50%;
+    max-width:100%;
+    max-height:100%;
+}
+
+.otherImage{
+    max-width:100%;
+    max-height:100%;
+}
+
+.centered{
+    text-align: center;
+}
+
+.checkBox{
+    padding:0px 20px;
+}
+
+.row{
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.buyButton:hover{
+    background-color: #007bff;
+    color: white;
+}
+
+.buyButton:active{
+    background-color:#7eb7f2;
+}
