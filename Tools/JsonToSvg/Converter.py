@@ -57,7 +57,8 @@ def Invert(data, max):
 def ToSVG(data):
     ans = "<svg height=\"100%\" width=\"100%\">\n"
 
-    for i in range(len(data)):
+    i = 0
+    while i < len(data):
         ans += "\t <g style=\"stroke:purple;stroke-width:3;fill:none\">\n"
         if i != 2:
 
@@ -73,6 +74,7 @@ def ToSVG(data):
                 ans += "\" />\n"
             i += 1
         ans += "\t</g>\n"
+        i += 1
     ans += "</svg>"
     return ans
 

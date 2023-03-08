@@ -47,3 +47,11 @@ h4{
 .buyButton:active{
     background-color:#7eb7f2;
 }
+
+g {
+    pointer-events: visible;
+}
+
+g:hover polygon{
+    fill:blue;
+}
