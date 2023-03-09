@@ -48,10 +48,15 @@ h4{
     background-color:#7eb7f2;
 }
 
-g {
+.mapG {
     pointer-events: visible;
+    stroke:black;
+    stroke-width:1;
+    fill:green
 }
 
-g:hover polygon{
-    fill:blue;
+.mapG:hover polygon{
+    stroke-width: 5;
+    stroke:white;
+    z-index: 3000;
 }

@@ -8,11 +8,10 @@ def ReadFile(fileName):
     f.close()
     ans = []
     for i in range(len(data['features'])):
-        if i != 2:
-            ans.append(data['features'][i]['geometry']['coordinates'][0][0])
-        else:
-            ans.append(data['features'][i]['geometry']['coordinates'][1][0])
-            ans.append(data['features'][i]['geometry']['coordinates'][3][0])
+        ans.append([])
+        for i2 in data['features'][i]['geometry']['coordinates']:
+            for i3 in i2:
+                ans[-1].append(i3)
     return ans
 
 def FindMinMax(data):
@@ -20,15 +19,16 @@ def FindMinMax(data):
     Y = [100, 0]
     for i in data:
         for i2 in i:
-            if i2[0] < X[0]:
-                X[0] = i2[0]
-            if i2[0] > X[1]:
-                X[1] = i2[0]
+            for i3 in i2:
+                if i3[0] < X[0]:
+                    X[0] = i3[0]
+                if i3[0] > X[1]:
+                    X[1] = i3[0]
 
-            if i2[1] < Y[0]:
-                Y[0] = i2[1]
-            if i2[1] > Y[1]:
-                Y[1] = i2[1]
+                if i3[1] < Y[0]:
+                    Y[0] = i3[1]
+                if i3[1] > Y[1]:
+                    Y[1] = i3[1]
     return [X, Y]
 
 def ToRange(data, minMax, trueMax):
@@ -38,43 +38,37 @@ def ToRange(data, minMax, trueMax):
     xMax = trueMax
     yMax = yRange / xRange * trueMax * 1.75
     ans = []
-    for i in range(len(data)):
+    for i in data:
         ans.append([])
-        for i2 in data[i]:
-            ans[i].append([ (i2[0] - minMax[0][0]) / ( minMax[0][1] - minMax[0][0]) * xMax, (i2[1] - minMax[1][0]) / ( minMax[1][1] - minMax[1][0]) * yMax])
+        for i2 in i:
+            ans[-1].append([])
+            for i3 in i2:
+                ans[-1][-1].append([ (i3[0] - minMax[0][0]) / ( minMax[0][1] - minMax[0][0]) * xMax, (i3[1] - minMax[1][0]) / ( minMax[1][1] - minMax[1][0]) * yMax])
     return ans, [xMax, yMax]
 
 def Invert(data, max):
     ans = []
     for i in data:
-        temp = []
+        ans.append([])
         for i2 in i:
-            temp.append([i2[0], max - i2[1]])
-        ans.append(temp)
+            ans[-1].append([])
+            for i3 in i2:
+                ans[-1][-1].append([i3[0], max - i3[1]])
     return ans
 
 
 def ToSVG(data):
+    i = 0
     ans = "<svg height=\"100%\" width=\"100%\">\n"
 
-    i = 0
-    while i < len(data):
-        ans += "\t <g style=\"stroke:purple;stroke-width:3;fill:none\">\n"
-        if i != 2:
-
+    for i in data:
+        ans += "\t <g class=\"mapG\" onmouseover=\"toFront(this)\">\n"
+        for i2 in i:
             ans += "\t\t <polygon points=\""
-            for i2 in data[i]:
-                ans += str(i2[0]) + "," + str(i2[1]) + " "
+            for i3 in i2:
+                ans += str(i3[0]) + "," + str(i3[1]) + " "
             ans += "\" />\n"
-        else:
-            for temp in range(2):
-                ans += "\t\t <polygon points=\""
-                for i2 in data[i + temp]:
-                    ans += str(i2[0]) + "," + str(i2[1]) + " "
-                ans += "\" />\n"
-            i += 1
         ans += "\t</g>\n"
-        i += 1
     ans += "</svg>"
     return ans
 
