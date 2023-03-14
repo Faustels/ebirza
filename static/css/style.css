@@ -15,6 +15,12 @@ h4{
     padding:10px;
 }
 
+.error {
+    color: red;
+    padding: 15px 0px 0px 0px;
+    text-align: center;
+}
+
 .userImage {
     border-radius: 50%;
     max-width:100%;

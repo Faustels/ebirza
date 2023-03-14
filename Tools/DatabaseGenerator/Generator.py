@@ -1,5 +1,6 @@
 import random as r
 from string import ascii_lowercase
+from hashlib import sha256
 
 amount = 10
 onlyProducer = 5
@@ -7,13 +8,14 @@ onlyConsumer = 50
 fileName = "data.txt"
 
 class User:
-    def __init__(self, id, name, lastName):
+    def __init__(self, id, name, lastName, salt):
         self.id = id
         self.name = name
         self.lastName = lastName
         self.email = name + lastName + "@ktu.edu"
-        self.password = "no"
         self.address = "no"
+        self.salt = salt
+        self.password = sha256(("password" + salt).encode('utf-8')).hexdigest()
         self.producer = 0
         self.consumer = 0
     def ToSQL(self):
@@ -22,8 +24,9 @@ class User:
         ans += "\'" + str(self.name) + "\',"
         ans += "\'" + str(self.lastName) + "\',"
         ans += "\'" + str(self.email) + "\',"
-        ans += "\'" + str(self.password) + "\',"
         ans += "\'" + str(self.address) + "\',"
+        ans += "\'" + str(self.password) + "\',"
+        ans += "\'" + str(self.salt) + "\',"
 
         if self.producer == 0:
             ans += "NULL,"
@@ -72,7 +75,7 @@ def GetNames():
     return names
 
 def GenerateUser(id, names):
-    return User(id + 1, r.choice(names), ''.join([r.choice(ascii_lowercase) for _ in range(5)]))
+    return User(id + 1, r.choice(names), ''.join([r.choice(ascii_lowercase) for _ in range(5)]), ''.join([r.choice(ascii_lowercase) for _ in range(32)]))
 
 def GenerateProducer(user, index):
     producer = Producer(index, r.randrange(100), r.randint(1,10000) / 100)
@@ -100,7 +103,7 @@ def ConsumerInsert(consumers):
     return ans
 
 def UserInsert(users):
-    ans = "Insert into user(id, name, lastName, email, password, address, producer, consumer) values \n"
+    ans = "Insert into user(id, name, lastName, email, address, password, salt, producer, consumer) values \n"
     for i in users:
         ans += i.ToSQL()
     ans = ans[:-2]
