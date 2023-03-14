@@ -58,26 +58,28 @@ def Invert(data, max):
 
 
 def ToSVG(data):
-    i = 0
+    apskritys = ["Alytus", "Kaunas", "Klaipėda", "Marijampolė", "Panevėžys", "Šiauliai", "Tauragė", "Telšiai", "Utena", "Vilnius"]
+    apskPoz = 0
     ans = "<svg height=\"100%\" width=\"100%\">\n"
 
     for i in data:
-        ans += "\t <g class=\"mapG\" onmouseover=\"toFront(this)\">\n"
+        ans += "\t <g id=\"" + apskritys[apskPoz] +"\" class=\"mapG\" onmouseover=\"toFront(this)\" onclick=\"clickRegion(this)\">\n"
         for i2 in i:
             ans += "\t\t <polygon points=\""
             for i3 in i2:
                 ans += str(i3[0]) + "," + str(i3[1]) + " "
             ans += "\" />\n"
         ans += "\t</g>\n"
+        apskPoz += 1
     ans += "</svg>"
     return ans
 
 def ToFile(ans, fileName):
-    f = open(fileName, "w")
+    f = open(fileName, "w", encoding="utf-8")
     f.write(ans)
     f.close()
 
 data = ReadFile(fileName)
-coords, maxRange = ToRange(data, FindMinMax(data), 1000)
+coords, maxRange = ToRange(data, FindMinMax(data), 500)
 coords = Invert(coords, maxRange[1])
 ToFile(ToSVG(coords), fileName)

@@ -29,4 +29,8 @@ app.register_blueprint(indexBlueprint)
 
 from Blueprints.main import mainBlueprint
 app.register_blueprint(mainBlueprint)
+
+from Blueprints.orai import oraiBlueprint
+app.register_blueprint(oraiBlueprint)
+
 app.run()

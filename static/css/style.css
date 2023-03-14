@@ -51,12 +51,36 @@ h4{
 .mapG {
     pointer-events: visible;
     stroke:black;
-    stroke-width:1;
+    stroke-width:2;
     fill:green
 }
 
 .mapG:hover polygon{
-    stroke-width: 5;
+    stroke-width: 2;
     stroke:white;
     z-index: 3000;
+}
+
+.customTooltip{
+    display:none;
+    position:fixed;
+    pointer-events: none;
+    width: auto;
+    background-color: white;
+    text-align: center;
+    padding: 5px 20px;
+    border-radius: 6px;
+    opacity: 90%;
+}
+
+.customTooltip::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent white transparent transparent;
+    opacity: 90%;
 }
