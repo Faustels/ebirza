@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form method="post" onsubmit="return login()" id="loginForm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginModalLabel">Prisijungti</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-outline mb-4" style="margin-bottom: 0px !important">
+                        <label for="loginMail">E-paštas</label>
+                        <input type="Mail" id="loginMail" name="loginMail" class="form-control"/>
+                        <label for="loginPassword">Slaptažodis</label>
+                        <input type="password" id="loginPassword" name="loginPassword" class="form-control"/>
+                        <div class="error" id="loginError">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Prisijungti</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Atgal</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

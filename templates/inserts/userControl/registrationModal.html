@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+<div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="registerModalLabel">Registruotis</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-6" style="padding-left:0px">
+                            <label for="registerName">Vardas</label>
+                            <input type="text" id="registerName" class="form-control"/>
+                        </div>
+                        <div class="col-lg-6" style="padding-right:0px">
+                            <label for="registerLastname">Pavardė</label>
+                            <input type="text" id="registerLastname" class="form-control"/>
+                        </div>
+                    </div>
+                    <label for="registerAddress">Adresas</label>
+                    <input type="text" id="registerAddress" class="form-control"/>
+                    <label for="registerMail">E-paštas</label>
+                    <input type="Mail" id="registerMail" class="form-control"/>
+                    <label for="registerPassword">Slaptažodis</label>
+                    <input type="password" id="registerPassword" class="form-control"/>
+                    <label>Rolė rinkoje</label>
+                    <div class="row justify-content-lg-center">
+                        <div class="checkBox">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Gamintojas
+                            </label>
+                        </div>
+                        <div class="checkBox">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Vartotojas
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">Registruotis</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Atgal</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

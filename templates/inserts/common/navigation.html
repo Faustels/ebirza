@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+{% include "inserts/userControl/loginModal.html" %}
+{% include "inserts/userControl/registrationModal.html" %}
+
+<div class="container">
+    <nav class="navbar navbar-expand navbar-dark bg-primary fixed-top">
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <button type="button" class="btn btn-primary">
+                        Apie mus
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button type="button" class="btn btn-primary">
+                        DUK
+                    </button>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">
+                        Prisijungti
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#registerModal">
+                        Registruotis
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
+
+</body>
+<script>
+    function login() {
+        var data = new FormData($("#loginForm")[0]);
+        fetch("/login", { method:"POST", body:data })
+            .then(res => res.text())
+            .then(response => {
+                resp = JSON.parse(response)
+                if (resp["ANS"] == "YES") { window.location.href = "/pagrindinis"; }
+                else { $("#loginError")[0].innerHTML = "<b>" + resp["ERROR"] + "</b>"; }});
+
+  return false;
+}
+</script>
+</html>
