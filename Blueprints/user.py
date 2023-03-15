@@ -40,3 +40,10 @@ def login():
         session["user"] = sessionUser
 
         return Response('{"ANS":"YES"}')
+
+@userBlueprint.route('/logout', methods=["POST"])
+def logout():
+    if "user" in session:
+        session.pop("user", None)
+        return Response('{"ANS":"YES"}')
+    return Response('{"ANS":"NO"}')
