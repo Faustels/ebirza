@@ -3,7 +3,13 @@ import MySQLdb.cursors
 
 mysql = MySQL()
 
-def MySQLGet(request):
+def MySQLGet(request, data):
     cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-    cursor.execute(request)
+    cursor.execute(request, data)
     return cursor.fetchall()
+
+def MySQLExecute(request, data):
+    cursor = mysql.connection.cursor()
+    cursor.execute(request, data)
+    mysql.connection.commit()
+    return cursor.lastrowid

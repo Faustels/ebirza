@@ -9,27 +9,7 @@
 
 <body class="d-flex flex-column min-vh-100">
 
-<div class="container">
-<nav class="navbar navbar-expand navbar-dark bg-primary fixed-top">
-    <div class="collapse navbar-collapse">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <button type="button" class="btn btn-primary">
-                    Apie mus
-                </button>
-            </li>
-            <li class="nav-item">
-                <button type="button" class="btn btn-primary">
-                    DUK
-                </button>
-            </li>
-        </ul>
-    </div>
-    <div style="color: white">
-        Aš  <img class="userImage" src="/static/images/avatar.png" alt="Avatar">
-    </div>
-</nav>
-</div>
+{% include "inserts/common/navigation.html" %}
 
 <div class="row">
     <div class="col-8 centered">
@@ -81,37 +61,7 @@
     </div>
 </div>
 
-<footer class="mt-auto bg-primary">
-
-  <div class="container-fluid text-center text-md-left">
-
-    <div class="row">
-
-      <div class="col-md-6 mt-md-0 mt-3">
-
-        <h5 class="text-uppercase font-weight-bold">Footer tekstas</h5>
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Expedita sapiente sint, nulla, nihil
-          repudiandae commodi voluptatibus corrupti animi sequi aliquid magnam debitis, maxime quam recusandae
-          harum esse fugiat. Itaque, culpa?</p>
-
-      </div>
-
-      <hr class="clearfix w-100 d-md-none pb-3">
-
-      <div class="col-md-6 mb-md-0 mb-3">
-
-        <h5 class="text-uppercase font-weight-bold">Kontaktai</h5>
-        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Optio deserunt fuga perferendis modi earum
-          commodi aperiam temporibus quod nulla nesciunt aliquid debitis ullam omnis quos ipsam, aspernatur id
-          excepturi hic.</p>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</footer>
+{% include "inserts/common/footer.html" %}
 
 </body>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

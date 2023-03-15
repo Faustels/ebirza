@@ -8,4 +8,4 @@ mainBlueprint = Blueprint('mainBlueprint', __name__, template_folder="../templat
 def index():
     if "user" not in session:
         return redirect("../", code = 302)
-    return render_template("pagrindinis.html")
+    return render_template("pagrindinis.html", user = session["user"])

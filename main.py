@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, session
 from flask_session import Session
 
 app = Flask(__name__)
@@ -22,6 +22,12 @@ app.config['MYSQL_PASSWORD'] = database['MYSQL_PASSWORD']
 app.config['MYSQL_DB'] = database['MYSQL_DB']
 
 mysql.init_app(app)
+
+#Request setup
+from Blueprints.user import userBlueprint
+app.register_blueprint(userBlueprint)
+
+
 
 # Page setup
 from Blueprints.index import indexBlueprint
