@@ -48,18 +48,6 @@
 
 </body>
 <script>
-    function login() {
-        var data = new FormData($("#loginForm")[0]);
-        fetch("/login", { method:"POST", body:data })
-            .then(res => res.text())
-            .then(response => {
-                resp = JSON.parse(response)
-                if (resp["ANS"] == "YES") { window.location.href = "/pagrindinis"; }
-                else { $("#loginError")[0].innerHTML = "<b>" + resp["ERROR"] + "</b>"; }});
-
-        return false;
-    }
-
     function logout(){
         fetch("/logout", { method:"POST"})
             .then(res => {location.reload();});
