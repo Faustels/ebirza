@@ -20,6 +20,7 @@
                 </li>
             </ul>
         </div>
+        {% if user is not defined: %}
         <div>
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
@@ -34,6 +35,14 @@
                 </li>
             </ul>
         </div>
+        {% else %}
+        <div style="color: white">
+            <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#registerModal" onclick="return logout()">
+                Atsijungti
+            </button>
+            Aš  <img class="userImage" src="/static/images/avatar.png" alt="Avatar">
+        </div>
+        {% endif %}
     </nav>
 </div>
 
@@ -48,7 +57,13 @@
                 if (resp["ANS"] == "YES") { window.location.href = "/pagrindinis"; }
                 else { $("#loginError")[0].innerHTML = "<b>" + resp["ERROR"] + "</b>"; }});
 
-  return false;
-}
+        return false;
+    }
+
+    function logout(){
+        fetch("/logout", { method:"POST"})
+            .then(res => {location.reload();});
+        return false;
+    }
 </script>
 </html>

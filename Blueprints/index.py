@@ -7,5 +7,6 @@ indexBlueprint = Blueprint('indexBlueprint', __name__, template_folder="../templ
 
 @indexBlueprint.route('/')
 def index():
-    if request.method == "GET":
-        return render_template("index.html")
+    if session.get("user"):
+        return render_template("index.html", user=session["user"])
+    return render_template("index.html")
