@@ -11,3 +11,4 @@ def MySQLGet(request, data):
 def MySQLExecute(request, data):
     cursor = mysql.connection.cursor()
     cursor.execute(request, data)
+    mysql.connection.commit()
