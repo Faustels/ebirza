@@ -98,9 +98,20 @@ def register():
         salt = ''.join([r.choice(ascii_lowercase) for _ in range(32)])
         password = sha256((request.form.get("registerPassword") + salt).encode('utf-8')).hexdigest()
 
-        MySQLExecute("Insert into user(name, lastName, email, address, password, salt) values \n(%s, %s, %s, %s, %s, %s)",
-                     (name, lastName, email, address, password, salt))
+        producerID = None
+        consumerID = None
 
-        session["user"] = User(0, email, address)
+        if roles["Producer"]:
+            producerID = MySQLExecute("Insert into producer(amount,price) values \n(%s, %s)",
+                                      (0, 0))
+
+        if roles["Consumer"]:
+            consumerID = MySQLExecute("Insert into consumer(amount) values \n(%s)",
+                                      (0,))
+
+        userId = MySQLExecute("Insert into user(name, lastName, email, address, password, salt, producer, consumer) values \n(%s, %s, %s, %s, %s, %s, %s, %s)",
+                     (name, lastName, email, address, password, salt, producerID, consumerID))
+
+        session["user"] = User(userId, email, address)
 
         return Response('{"ANS": "YES"}')
