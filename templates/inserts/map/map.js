@@ -24,15 +24,13 @@ function changeTooltip(e){
 }
 
 function clickRegion(object) {
-    if (object.classList.contains("mapGSelected")) {
-        object.classList.remove("mapGSelected")
+    if (currentSelector == object.currentlySelected) {
         $("#" + object.currentlySelected)[0].classList.remove("mapGSelected")
         currentSelector = ""
     } else {
         if (currentSelector != "") {
             $("#" + currentSelector)[0].classList.remove("mapGSelected")
         }
-        object.classList.add("mapGSelected")
         $("#" + object.currentlySelected)[0].classList.add("mapGSelected")
         currentSelector = object.currentlySelected
     }
