@@ -1,5 +1,10 @@
+:root {
+    --site-color: #f2f2f2;
+}
+
 body {
     padding:80px 0px 0px 0px;
+    background-color:var(--site-color)
 }
 
 html {
@@ -109,13 +114,19 @@ h4{
 
 .mapStatisticContainer > *{
     color: white;
-    border-width:2em;
+    border-width: 0em 2em 2em 2em;
     border-style: dashed;
-    border-color: white;
+    border-color: var(--site-color);
     background-clip: padding-box;
     padding:1em;
 }
 
 .mapDisplay {
     text-align: center;
+    padding: 4em;
+    background-color: #cccccc;
+    background-clip: padding-box;
+    border-width: 0em 2em 2em 2em;
+    border-style: dashed;
+    border-color: var(--site-color);
 }
