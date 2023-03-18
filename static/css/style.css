@@ -52,13 +52,17 @@ h4{
     pointer-events: visible;
     stroke:black;
     stroke-width:2;
-    fill:green
+    fill:#ff9900;
+    filter: brightness(100%);
 }
 
 .mapG:hover polygon{
     stroke-width: 2;
     stroke:white;
-    z-index: 3000;
+}
+
+.mapGFront{
+    fill-opacity:0%;
 }
 
 .customTooltip{
@@ -71,6 +75,7 @@ h4{
     padding: 5px 20px;
     border-radius: 6px;
     opacity: 90%;
+    user-select:none;
 }
 
 .customTooltip::after {
@@ -83,4 +88,16 @@ h4{
     border-style: solid;
     border-color: transparent white transparent transparent;
     opacity: 90%;
+}
+
+.mapGSelected {
+    animation-name: selectedAnimation;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes selectedAnimation {
+    0% {filter:brightness(100%);}
+    50% {filter:brightness(130%);}
+    100% {filter:brightness(100%)}
 }

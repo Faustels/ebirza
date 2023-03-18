@@ -1,23 +1,39 @@
 
 document.addEventListener("mousemove", changeTooltip);
+currentSelector = ""
 function toFront(object){
-    document.getElementById("mapFrontRegion").innerHTML = object.innerHTML
-    document.getElementById("mapFrontRegion").onclick = object.onclick
-    document.getElementById("mapFrontRegion").tooltipText = "<b>" + object.id + "</b>"
+    $("#mapFrontRegion")[0].classList.remove("mapGSelected")
+    if (object.classList.contains("mapGSelected")) {
+        $("#mapFrontRegion")[0].classList.add("mapGSelected")
+    }
+    $("#mapFrontRegion")[0].innerHTML = object.innerHTML
+    $("#mapFrontRegion")[0].tooltipText = "<b>" + object.id + "</b>"
+    $("#mapFrontRegion")[0].currentlySelected = object.id
     showTooltip(object)
 }
 function showTooltip(object) {
-    document.getElementById("customTooltip").style.display = 'block'
-    document.getElementById("customTooltip").innerHTML = object.tooltipText
+    $("#customTooltip")[0].style.display = 'block'
+    $("#customTooltip")[0].innerHTML = object.tooltipText
 }
 function hideTooltip(){
-    document.getElementById("customTooltip").style.display = 'none'
+    $("#customTooltip")[0].style.display = 'none'
 }
 function changeTooltip(e){
-    document.getElementById("customTooltip").style.top = (e.clientY).toString() + "px"
-    document.getElementById("customTooltip").style.left = (e.clientX + 20).toString()  + "px"
+    $("#customTooltip")[0].style.top = (e.clientY).toString() + "px"
+    $("#customTooltip")[0].style.left = (e.clientX + 20).toString()  + "px"
 }
 
-function clickRegion(object){
-    console.log("test")
+function clickRegion(object) {
+    if (object.classList.contains("mapGSelected")) {
+        object.classList.remove("mapGSelected")
+        $("#" + object.currentlySelected)[0].classList.remove("mapGSelected")
+        currentSelector = ""
+    } else {
+        if (currentSelector != "") {
+            $("#" + currentSelector)[0].classList.remove("mapGSelected")
+        }
+        object.classList.add("mapGSelected")
+        $("#" + object.currentlySelected)[0].classList.add("mapGSelected")
+        currentSelector = object.currentlySelected
+    }
 }
