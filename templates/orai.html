@@ -2,11 +2,43 @@
 <html>
 <head>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="../static/css/style.css">
     <title>Puslapis</title>
 </head>
 <body>
-{% include "inserts/map/map.html" %}
+<div class="row mapStatisticContainer">
+    <div class="col-sm-4" style="background-color:dodgerblue">
+        <div>
+            <h3> 20 </h3>
+            <p>Elektros energijos gamintojai</p>
+        </div>
+        <div>
+            <i class="icon bi-lightning"></i>
+        </div>
+    </div>
+    <div class="col-sm-4" style="background-color:slateblue">
+        <div>
+            <h3> 25% </h3>
+            <p>Žaliosios energijos progresas</p>
+        </div>
+        <div>
+            <i class="icon bi-list-task"></i>
+        </div>
+    </div>
+    <div class="col-sm-4" style="background-color:orange">
+        <div>
+            <h3> 88% </h3>
+            <p>Patenkinti klientai</p>
+        </div>
+        <div>
+            <i class="icon bi-hand-thumbs-up"></i>
+        </div>
+    </div>
+</div>
+<div class="mapDisplay">
+    {% include "inserts/map/map.html" %}
+</div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>

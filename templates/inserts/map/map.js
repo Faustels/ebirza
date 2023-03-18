@@ -11,8 +11,10 @@ function toFront(object){
     showTooltip(object)
 }
 function showTooltip(object) {
-    tooltip.style.display = 'block'
-    tooltip.innerHTML = object.tooltipText
+    if (typeof object.tooltipText !== 'undefined'){
+        tooltip.style.display = 'block'
+        tooltip.innerHTML = object.tooltipText
+    }
 }
 function hideTooltip(){
     tooltip.style.display = 'none'

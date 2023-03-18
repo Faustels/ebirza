@@ -93,3 +93,23 @@ h4{
     fill-opacity: 80%;
 }
 
+.icon {
+    position:absolute;
+    top:auto;
+    bottom: 0.5em;
+    right: 0.25em;
+    font-size:3em;
+}
+
+.mapStatisticContainer > *{
+    color: white;
+    border-width:2em;
+    border-style: dashed;
+    border-color: white;
+    background-clip: padding-box;
+    padding:1em;
+}
+
+.mapDisplay {
+    text-align: center;
+}
