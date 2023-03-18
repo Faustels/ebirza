@@ -53,3 +53,69 @@ h4{
 .buyButton:active{
     background-color:#7eb7f2;
 }
+
+.mapG {
+    pointer-events: visible;
+    stroke:white;
+    stroke-width:2;
+}
+
+.mapG:hover polygon{
+    stroke-width: 2;
+    stroke:black;
+}
+
+.mapGFront{
+    fill-opacity:0%;
+}
+
+.customTooltip{
+    display:none;
+    position:fixed;
+    pointer-events: none;
+    width: auto;
+    background-color: white;
+    text-align: center;
+    padding: 5px 20px 0px 20px;
+    border-radius: 6px;
+    opacity: 90%;
+    user-select:none;
+}
+
+.customTooltip::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent white transparent transparent;
+    opacity: 90%;
+}
+
+.mapGSelected {
+    fill: blue !important;
+    fill-opacity: 80%;
+}
+
+.icon {
+    position:absolute;
+    top:auto;
+    bottom: 0.5em;
+    right: 0.25em;
+    font-size:3em;
+}
+
+.mapStatisticContainer > *{
+    color: white;
+    border-width:2em;
+    border-style: dashed;
+    border-color: white;
+    background-clip: padding-box;
+    padding:1em;
+}
+
+.mapDisplay {
+    text-align: center;
+}
