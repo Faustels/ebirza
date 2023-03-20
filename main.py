@@ -20,6 +20,8 @@ if autocompleteKey == "RAKTAS_CIA":
     print("Darbas baigiamas")
     sys.exit()
 
+import Services.Location.autocomplete as autocomplete
+autocomplete.key = autocompleteKey
 
 # Reading configuration
 config = configparser.ConfigParser()
