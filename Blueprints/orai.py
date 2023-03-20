@@ -14,4 +14,6 @@ def ToJSDictionary(data):
 @oraiBlueprint.route('/orai')
 def index():
     sun = MySQLGet('Select name, sunshineHours FROM county', None)
-    return render_template("orai.html", sunShineDict = ToJSDictionary(sun) , user=session["user"])
+    if session.get("user"):
+        return render_template("orai.html", sunShineDict = ToJSDictionary(sun) , user=session["user"])
+    return render_template("orai.html", sunShineDict=ToJSDictionary(sun))
