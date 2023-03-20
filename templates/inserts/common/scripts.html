@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html lang="en">
+<script>
+    {% if user is not defined: %}
+        {% include "inserts/userControl/loggedOutFunctions.js" %}
+    {% else %}
+        {% include "inserts/userControl/loggedInFunctions.js" %}
+    {% endif %}
+</script>
+</html>
