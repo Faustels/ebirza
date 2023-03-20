@@ -33,7 +33,7 @@ app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
 
 # Database setup
-from database import mysql
+from Services.Database.database import mysql
 
 database = config["database"]
 

@@ -1,5 +1,5 @@
 from flask import Blueprint, session, Response, request
-from database import MySQLGet, MySQLExecute
+from Services.Database.database import MySQLGet, MySQLExecute
 from Models.user import User
 from hashlib import sha256
 import re
@@ -109,7 +109,7 @@ def register():
             consumerID = MySQLExecute("Insert into consumer(amount) values \n(%s)",
                                       (0,))
 
-        userId = MySQLExecute("Insert into user(name, lastName, email, address, password, salt, producer, consumer) values \n(%s, %s, %s, %s, %s, %s, %s, %s)",
+        userId = MySQLExecute("Insert into user(name, lastName, email, address, password, salt, producer, consumer)values \n(%s, %s, %s, %s, %s, %s, %s, %s)",
                      (name, lastName, email, address, password, salt, producerID, consumerID))
 
         session["user"] = User(userId, email, address)

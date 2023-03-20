@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, session, redirect
-from database import MySQLGet
+from Services.Database.database import MySQLGet
 from Models.user import User
 import MySQLdb.cursors
 
