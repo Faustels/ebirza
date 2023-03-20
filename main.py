@@ -1,15 +1,36 @@
 from flask import Flask, session
 from flask_session import Session
+import os
+import sys
+
+#Reading private configuration
+if not os.path.exists("privateConfig.ini"):
+    newPrivateConfigFile = open("privateConfig.ini", "w")
+    newPrivateConfigFile.write("[locationAPI]\nAUTOCOMPLETE_KEY = RAKTAS_CIA")
+    print("Buvo sukurtas privateConfig.ini failas, nes jis neegzistuoja. Reikia jį papildyti su privačiais geoapify raktais.")
+    print("Darbas baigiamas")
+    sys.exit()
+
+import configparser
+privateConfig = configparser.ConfigParser()
+privateConfig.read("privateConfig.ini")
+autocompleteKey = privateConfig["locationAPI"]["AUTOCOMPLETE_KEY"]
+if autocompleteKey == "RAKTAS_CIA":
+    print("Reikia papildyti privateConfig.ini failą su privačiais raktais.")
+    print("Darbas baigiamas")
+    sys.exit()
+
+
+# Reading configuration
+config = configparser.ConfigParser()
+config.read("config.ini")
+
+
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "1"
 app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
-
-# Reading configuration
-import configparser
-config = configparser.ConfigParser()
-config.read("config.ini")
 
 # Database setup
 from database import mysql
