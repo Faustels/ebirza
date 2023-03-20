@@ -50,6 +50,8 @@ mysql.init_app(app)
 from Blueprints.user import userBlueprint
 app.register_blueprint(userBlueprint)
 
+from Blueprints.locationAPI import locationAPIBlueprint
+app.register_blueprint(locationAPIBlueprint)
 
 
 # Page setup
