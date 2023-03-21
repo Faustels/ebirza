@@ -1,7 +1,5 @@
-from flask import Blueprint, render_template, session, redirect
-from database import MySQLGet
-import Models.user
-
+from flask import Blueprint, render_template, session
+from Services.Database.database import MySQLGet
 oraiBlueprint = Blueprint('oraiBlueprint', __name__, template_folder="../templates", static_folder="../static")
 
 def ToJSDictionary(data):
@@ -14,4 +12,6 @@ def ToJSDictionary(data):
 @oraiBlueprint.route('/orai')
 def index():
     sun = MySQLGet('Select name, sunshineHours FROM county', None)
-    return render_template("orai.html", sunShineDict = ToJSDictionary(sun))
+    if session.get("user"):
+        return render_template("orai.html", sunShineDict = ToJSDictionary(sun) , user=session["user"])
+    return render_template("orai.html", sunShineDict=ToJSDictionary(sun))

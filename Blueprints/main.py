@@ -1,6 +1,4 @@
 from flask import Blueprint, render_template, session, redirect
-from database import mysql
-import Models.user
 
 mainBlueprint = Blueprint('mainBlueprint', __name__, template_folder="../templates", static_folder="../static")
 

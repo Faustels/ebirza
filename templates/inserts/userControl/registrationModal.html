@@ -23,7 +23,7 @@
                             </div>
                         </div>
                         <label for="registerAddress">Adresas</label>
-                        <input type="text" id="registerAddress" class="form-control" name="registerAddress"/>
+                        <input type="text" id="registerAddress" class="form-control addressAutoComplete" name="registerAddress" autocomplete="off"/>
                         <label for="registerMail">E-paštas</label>
                         <input type="Mail" id="registerMail" class="form-control" name="registerMail"/>
                         <label for="registerPassword">Slaptažodis</label>
@@ -55,17 +55,4 @@
     </div>
 </div>
 </body>
-<script>
-    function register(){
-        var data = new FormData($("#registerForm")[0]);
-        fetch("/register", { method: "POST", body: data})
-            .then(res => res.text())
-            .then(response => {
-                resp = JSON.parse(response)
-                if (resp["ANS"] == "YES") { window.location.href = "/pagrindinis"; }
-                else { $("#registerError")[0].innerHTML = "<b>" + resp["ERROR"] + "</b>"; }});
-
-        return false;
-    }
-</script>
 </html>

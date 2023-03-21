@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <body>
+{% if user is not defined: %}
 {% include "inserts/userControl/loginModal.html" %}
 {% include "inserts/userControl/registrationModal.html" %}
+{% endif %}
 
 <div class="container">
     <nav class="navbar navbar-expand navbar-dark bg-primary fixed-top">
@@ -47,11 +49,4 @@
 </div>
 
 </body>
-<script>
-    function logout(){
-        fetch("/logout", { method:"POST"})
-            .then(res => {location.reload();});
-        return false;
-    }
-</script>
 </html>

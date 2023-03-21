@@ -1,18 +1,41 @@
-from flask import Flask, session
+from flask import Flask
 from flask_session import Session
+import os
+import sys
+
+#Reading private configuration
+if not os.path.exists("privateConfig.ini"):
+    newPrivateConfigFile = open("privateConfig.ini", "w")
+    newPrivateConfigFile.write("[locationAPI]\nLOCATION_KEY = RAKTAS_CIA")
+    print("Buvo sukurtas privateConfig.ini failas, nes jis neegzistuoja. Reikia jį papildyti su privačiais geoapify raktais.")
+    print("Darbas baigiamas")
+    sys.exit()
+
+import configparser
+privateConfig = configparser.ConfigParser()
+privateConfig.read("privateConfig.ini")
+locationKey = privateConfig["locationAPI"]["LOCATION_KEY"]
+if locationKey == "RAKTAS_CIA":
+    print("Reikia papildyti privateConfig.ini failą su privačiais raktais.")
+    print("Darbas baigiamas")
+    sys.exit()
+
+import Services.Location.locationAPI as location
+location.key = locationKey
+
+# Reading configuration
+config = configparser.ConfigParser()
+config.read("config.ini")
+
+
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "1"
 app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
 
-# Reading configuration
-import configparser
-config = configparser.ConfigParser()
-config.read("config.ini")
-
 # Database setup
-from database import mysql
+from Services.Database.database import mysql
 
 database = config["database"]
 
@@ -27,6 +50,8 @@ mysql.init_app(app)
 from Blueprints.user import userBlueprint
 app.register_blueprint(userBlueprint)
 
+from Blueprints.locationAPI import locationAPIBlueprint
+app.register_blueprint(locationAPIBlueprint)
 
 
 # Page setup

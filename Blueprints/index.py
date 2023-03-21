@@ -1,7 +1,4 @@
-from flask import Blueprint, render_template, request, session, redirect
-from database import MySQLGet
-from Models.user import User
-import MySQLdb.cursors
+from flask import Blueprint, render_template, session
 
 indexBlueprint = Blueprint('indexBlueprint', __name__, template_folder="../templates", static_folder="../static")
 
