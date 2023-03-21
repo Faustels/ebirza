@@ -17,9 +17,6 @@ var autocompleteTimer;
                                 if (result["rank"]["confidence"] <= 0.5) {
                                     continue
                                 }
-                                if (result["result_type"] !== "street" && result["result_type"] !== "building") {
-                                    continue
-                                }
                                 if (result["address_line1"].split('—').length-1 > 0){
                                     continue
                                 }
@@ -30,7 +27,10 @@ var autocompleteTimer;
                                 else {
                                     temp += result["county"]
                                 }
-                                temp += ", " + result["address_line1"]
+                                temp += ", " + result["street"]
+                                if ("housenumber" in result){
+                                    temp += " " + result["housenumber"]
+                                }
                                 ans.push(temp)
                             }
                             trueAns = []
