@@ -12,12 +12,14 @@ var autocompleteTimer;
                         .then(response => {
                             let resp = JSON.parse(response);
                             let ans = []
-                            console.log(resp)
                             for (result of resp["results"]) {
                                 if (result["rank"]["confidence"] <= 0.5) {
                                     continue
                                 }
                                 if (result["address_line1"].split('—').length-1 > 0){
+                                    continue
+                                }
+                                if (typeof result["street"] === 'undefined'){
                                     continue
                                 }
                                 let temp = "";

@@ -1,4 +1,4 @@
-from flask import Flask, session
+from flask import Flask
 from flask_session import Session
 import os
 import sys
@@ -6,7 +6,7 @@ import sys
 #Reading private configuration
 if not os.path.exists("privateConfig.ini"):
     newPrivateConfigFile = open("privateConfig.ini", "w")
-    newPrivateConfigFile.write("[locationAPI]\nAUTOCOMPLETE_KEY = RAKTAS_CIA")
+    newPrivateConfigFile.write("[locationAPI]\nLOCATION_KEY = RAKTAS_CIA")
     print("Buvo sukurtas privateConfig.ini failas, nes jis neegzistuoja. Reikia jį papildyti su privačiais geoapify raktais.")
     print("Darbas baigiamas")
     sys.exit()
@@ -14,14 +14,14 @@ if not os.path.exists("privateConfig.ini"):
 import configparser
 privateConfig = configparser.ConfigParser()
 privateConfig.read("privateConfig.ini")
-autocompleteKey = privateConfig["locationAPI"]["AUTOCOMPLETE_KEY"]
-if autocompleteKey == "RAKTAS_CIA":
+locationKey = privateConfig["locationAPI"]["LOCATION_KEY"]
+if locationKey == "RAKTAS_CIA":
     print("Reikia papildyti privateConfig.ini failą su privačiais raktais.")
     print("Darbas baigiamas")
     sys.exit()
 
-import Services.Location.autocomplete as autocomplete
-autocomplete.key = autocompleteKey
+import Services.Location.locationAPI as location
+location.key = locationKey
 
 # Reading configuration
 config = configparser.ConfigParser()

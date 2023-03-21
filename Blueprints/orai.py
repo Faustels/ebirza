@@ -1,7 +1,5 @@
-from flask import Blueprint, render_template, session, redirect
+from flask import Blueprint, render_template, session
 from Services.Database.database import MySQLGet
-import Models.user
-
 oraiBlueprint = Blueprint('oraiBlueprint', __name__, template_folder="../templates", static_folder="../static")
 
 def ToJSDictionary(data):
