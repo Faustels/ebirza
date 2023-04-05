@@ -7,4 +7,6 @@ assistantBlueprint = Blueprint('assistantBlueprint', __name__, template_folder="
 
 @assistantBlueprint.route('/assistant')
 def getAutocomplete():
+    if "text" not in request.args:
+        return Response("Įvesk tekstą.")
     return Response(Query(request.args.get("text")))
