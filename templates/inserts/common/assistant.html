@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <body>
+<
 <div class="assistantBox">
     <div class="assistantMessageBox" id="assistantMessageBox">
         <div class="assistantMessage">
@@ -11,12 +12,10 @@
         </div>
     </div>
     <div>
-        <form onsubmit="return sendAssistantMessage()" id="assistantForm">
-            <div class="assistantMessageSend">
-                <input type="text" id="assistantTextBox" name="text" class="assistantTextBox">
-                <input type="submit" class="assistantSubmit">
-            </div>
-        </form>
+        <div class="assistantMessageSend">
+            <input type="text" id="assistantTextBox" name="text" class="assistantTextBox">
+            <button onclick="sendAssistantMessage()" class="assistantSubmit"> Pateikti </button>
+        </div>
     </div>
 </div>
 </body>
