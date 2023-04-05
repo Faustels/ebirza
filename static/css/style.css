@@ -153,10 +153,17 @@ h4{
 
 .assistantTextbox {
     width:60%;
-    height:24px;
+    height:2em;
 }
 
 .assistantSubmit {
     width:35%;
-    height: 30px;
+    height: 2em;
+}
+
+.assistantBox{
+    position: fixed;
+    bottom: 150px;
+    right: 0;
+    width: 20em;
 }
