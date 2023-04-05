@@ -64,4 +64,7 @@ app.register_blueprint(mainBlueprint)
 from Blueprints.orai import oraiBlueprint
 app.register_blueprint(oraiBlueprint)
 
+from Blueprints.assistant import assistantBlueprint
+app.register_blueprint(assistantBlueprint)
+
 app.run()

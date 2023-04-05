@@ -9,6 +9,7 @@
      integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
      crossorigin=""></script>
 <script>
+    {% include "inserts/common/assistantFunctions.js" %}
     {% if user is not defined: %}
         {% include "inserts/userControl/loggedOutFunctions.js" %}
         {% include "inserts/location/autocomplete.js" %}

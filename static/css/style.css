@@ -130,3 +130,40 @@ h4{
     border-style: dashed;
     border-color: var(--site-color);
 }
+
+.assistantUserMessage {
+    text-align: right;
+}
+
+.assistantMessage{
+    text-align: left;
+}
+
+.assistantMessageBox{
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height:12em;
+    width:100%;
+}
+
+.assistantMessageSend {
+    overflow:auto;
+    width: 100%;
+}
+
+.assistantTextBox {
+    width:60%;
+    height:2em;
+}
+
+.assistantSubmit {
+    width:35%;
+    height: 2em;
+}
+
+.assistantBox{
+    position: fixed;
+    bottom: 150px;
+    right: 0;
+    width: 20em;
+}
