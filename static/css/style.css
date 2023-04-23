@@ -107,63 +107,129 @@ h4{
 .icon {
     position:absolute;
     top:auto;
-    bottom: 0.5em;
-    right: 0.25em;
-    font-size:3em;
+    bottom: 1.25rem;
+    right: 0.25rem;
+    font-size:3rem;
 }
 
 .mapStatisticContainer > *{
     color: white;
-    border-width: 0em 2em 2em 2em;
+    border-width: 0rem 2rem 2rem 2rem;
     border-style: dashed;
     border-color: var(--site-color);
     background-clip: padding-box;
-    padding:1em;
+    padding:1rem;
 }
 
 .mapDisplay {
     text-align: center;
-    padding: 4em;
+    padding: 4rem;
     background-color: #cccccc;
     background-clip: padding-box;
-    border-width: 0em 2em 2em 2em;
+    border-width: 0rem 2rem 2rem 2rem;
     border-style: dashed;
     border-color: var(--site-color);
 }
 
 .assistantUserMessage {
-    text-align: right;
+    align-self: flex-end;
+    background-color: dodgerblue;
+    color:white;
+    margin: 0.5rem 0.5rem 1rem 1.5rem;
+}
+
+.assistantBotMessage {
+    background-color: lightgray;
+    margin: 0.5rem 1.5rem 1rem 0.5rem;
 }
 
 .assistantMessage{
-    text-align: left;
+    padding: 0.5rem;
+    border-radius: 15px;
+    width: fit-content;
+    word-wrap: break-word;
+    max-width:85%
 }
 
 .assistantMessageBox{
     overflow-y: scroll;
     overflow-x: hidden;
-    height:12em;
+    height:25vh;
     width:100%;
+    display:flex;
+    flex-direction:column;
 }
 
 .assistantMessageSend {
     overflow:auto;
     width: 100%;
+    display:flex;
 }
 
 .assistantTextBox {
-    width:60%;
-    height:2em;
+    flex-grow: 1;
+    height:2rem;
+    margin-right: 0.5rem;
 }
 
 .assistantSubmit {
-    width:35%;
-    height: 2em;
+    width:fit-content;
+    height: 2rem;
+    border-width: 1px;
+    transition-duration: 100ms;
+}
+
+.assistantSubmit:hover{
+    background-color: dodgerblue;
+    color: white;
 }
 
 .assistantBox{
+    background-color: white;
+    border-radius: 15px;
+    overflow: hidden;
+    display: none;
+}
+
+.assistantFunctions {
+    padding: 1rem;
+    border-style: solid;
+    border-width: 2px 0 0 0;
+    border-color: lightgrey;
+}
+
+.assistantBar {
+    background-color: dodgerblue;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.assistantExit {
+    border-width: 0;
+    background-color: dodgerblue;
+    margin-right: 0.25rem;
+}
+
+.assistantExit:hover {
+    color:white;
+}
+
+.assistantContainer{
+    margin-right: 1rem;
     position: fixed;
-    bottom: 150px;
+    bottom: 10rem;
     right: 0;
-    width: 20em;
+    width: 20rem;
+    z-index: 1;
+}
+
+.assistantImageContainer {
+    display:flex;
+    justify-content: flex-end;
+}
+.assistantImage {
+    border-radius: 50%;
+    width:5rem;
+    height:5rem;
+    cursor: pointer;
 }
