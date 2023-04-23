@@ -1,4 +1,6 @@
 
+var assistantBox = $("#assistantBox")[0];
+var assistantImageContainer = $("#assistantImageContainer")[0];
 var assistantMessageBox = $("#assistantMessageBox")[0];
 var assistantTextBox = $("#assistantTextBox")[0];
 
@@ -32,4 +34,14 @@ function addToBox(text, isUser){
     ans += text
     ans += "</div>"
     return ans
+}
+
+function closeAssistant(){
+    assistantBox.style.display = "none";
+    assistantImageContainer.style.display = "flex";
+}
+
+function openAssistant(){
+    assistantBox.style.display = "block";
+    assistantImageContainer.style.display = "none";
 }
