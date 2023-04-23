@@ -1,6 +1,12 @@
 
 var assistantMessageBox = $("#assistantMessageBox")[0];
 var assistantTextBox = $("#assistantTextBox")[0];
+
+assistantTextBox.onkeyup = function(e){
+    if (e.keyCode == 13){
+        sendAssistantMessage();
+    }
+}
 function sendAssistantMessage(){
     if (assistantTextBox.value == ""){ return;}
     fetch("/assistant?text=" + assistantTextBox.value, { method:"GET" })
@@ -15,12 +21,12 @@ function sendAssistantMessage(){
 }
 
 function addToBox(text, isUser){
-    let ans = "<div class='"
+    let ans = "<div class='assistantMessage "
     if (isUser){
         ans += "assistantUserMessage";
     }
     else{
-        ans += "assistantMessage";
+        ans += "assistantBotMessage";
     }
     ans += "'>"
     ans += text
