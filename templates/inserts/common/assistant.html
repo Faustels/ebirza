@@ -1,20 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <body>
-<
-<div class="assistantBox">
-    <div class="assistantMessageBox" id="assistantMessageBox">
-        <div class="assistantMessage">
-            test
-        </div>
-        <div class="assistantUserMessage">
-            test2
-        </div>
+<div class="assistantContainer">
+    <div class="assistantImageContainer" id="assistantImageContainer">
+        <img class="assistantImage" src="/static/images/assistant.png" alt="Assistant" onclick="openAssistant()">
     </div>
-    <div>
-        <div class="assistantMessageSend">
-            <input type="text" id="assistantTextBox" name="text" class="assistantTextBox">
-            <button onclick="sendAssistantMessage()" class="assistantSubmit"> Pateikti </button>
+    <div class="assistantBox" id="assistantBox">
+        <div class="assistantBar">
+            <button class="assistantExit" onclick="closeAssistant()">x</button>
+        </div>
+        <div class="assistantMessageBox" id="assistantMessageBox">
+            <div class="assistantMessage assistantBotMessage">
+                Sveiki, aš esu virtualus asistentas. Jei reikia pagalbos, parašykite man žinutę.
+            </div>
+        </div>
+        <div class="assistantFunctions">
+            <div class="assistantMessageSend">
+                <input type="text" id="assistantTextBox" name="text" class="assistantTextBox">
+                <button onclick="sendAssistantMessage()" class="assistantSubmit"><i class="bi-chat"></i></button>
+            </div>
         </div>
     </div>
 </div>
