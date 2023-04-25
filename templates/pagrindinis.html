@@ -21,14 +21,14 @@
         <div class="row">
             <div class="col-6">
                 <label for="maxPrice" class="form-label" id="priceLabel">Maksimali kaina: 0.2 €/kWh</label>
-                <input style="width:100%" type="range" class="form-range" min="0" max="1" step="0.001" id="maxPrice" value="0.2" oninput="updatePrice()">
+                <input style="width:100%" type="range" class="form-range" min="0" max="1" step="0.001" id="maxPrice" value="0.2" oninput="updatePrice()" onchange="updateTable()">
             </div>
             <div class="col-6">
                 <label for="maxAmount" class="form-label" id="amountLabel">Maksimalus kiekis: 20 kWh</label>
-                <input style="width:100%" type="range" class="form-range" min="0" max="1000" step="1" id="maxAmount" value = "20" oninput="updateAmount()">
+                <input style="width:100%" type="range" class="form-range" min="1" max="1000" step="1" id="maxAmount" value = "20" oninput="updateAmount()" onchange="updateTable()">
             </div>
         </div>
-        <table id="offerDataHead" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+        <table id="offerDataTable" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
             <thead>
                 <tr>
                     <th class="th-sm">Pardavėjas
@@ -42,6 +42,24 @@
                 </tr>
             </thead>
             <tbody id="offerData">
+                <tr>
+                    <td>Petriukas</td>
+                    <td>10</td>
+                    <td>5</td>
+                    <td class="buyButton">Pirkti</td>
+                </tr>
+                <tr>
+                    <td>Aldona</td>
+                    <td>100</td>
+                    <td>50000</td>
+                    <td class="buyButton">Pirkti</td>
+                </tr>
+                <tr>
+                    <td>Antanas</td>
+                    <td>40</td>
+                    <td>1</td>
+                    <td class="buyButton">Pirkti</td>
+                </tr>
             </tbody>
         </table>
     </div>
@@ -77,7 +95,7 @@
 }).addTo(map);
     var marker = L.marker([lat, lon]).addTo(map);
     $(document).ready(function () {
-        $('#bandymas').DataTable( {
+        $('#offerDataTable').DataTable( {
         "language": {
             "lengthMenu": "Rodyti _MENU_ pardavėjų viename puslapyje",
             "zeroRecords": "Nieko nerasta",
@@ -102,12 +120,32 @@
     var priceLabel = $("#priceLabel")[0];
     var amountLabel = $("#amountLabel")[0];
 
+    var offerData = $("#offerData")[0];
+
     function updatePrice(){
         priceLabel.innerHTML = "Maksimali kaina: " + priceInput.value.toString() + " €/kWh";
     }
 
     function updateAmount(){
         amountLabel.innerHTML = "Maksimalus kiekis: " + amountInput.value.toString() + " kWh";
+    }
+
+    function updateTable() {
+        offerData.innerHTML = ""
+        fetch("/pagrindinis/getOffers?price=" + priceInput.value.toString() + "&amount=" + amountInput.value.toString(), { method:"GET" })
+            .then(res => res.json())
+            .then(response => {
+                if (response[0] === null) {return}
+                response.forEach((value) => {
+                    temp = "<tr>\n";
+                    temp += "<td>" + value["name"] + "</td>\n";
+                    temp += "<td>" + value["price"].toString() + "</td>\n";
+                    temp += "<td>" + value["amount"].toString() + "</td>\n";
+                    temp += "<td class='buyButton'>Pirkti</td>"
+                    temp += "</tr>\n"
+                    offerData.innerHTML += temp;
+                    });
+                });
     }
 </script>
 </html>
