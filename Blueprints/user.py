@@ -44,15 +44,29 @@ def login():
         if not ValidEmail(email):
             return Response('{"ANS":"NO", "ERROR":"Blogas pašto adresas"}')
 
-        user = MySQLGet("Select password, id, address, salt from user where email = %s", (email,))
+        user = MySQLGet("Select password, id, address, salt, producer, consumer from user where email = %s", (email,))
         if len(user) == 0:
             return Response('{"ANS":"NO", "ERROR":"Naudotojas neegzistuoja"}')
 
         if not RightPassword(request.form.get("loginPassword"), user[0]['salt'], user[0]['password']):
-            print()
             return Response('{"ANS":"NO", "ERROR":"Blogas slaptažodis"}')
 
-        sessionUser = User(user[0]["id"], email, user[0]["address"])
+        produced = None
+        setPrice = None
+        consumed = None
+
+        if user[0]["producer"] != None:
+            producer = MySQLGet("Select amount, price from producer where id = %s",
+                            (user[0]["producer"],))
+            produced = producer[0]["amount"]
+            setPrice = producer[0]["price"]
+
+        if user[0]["consumer"] != None:
+            consumer = MySQLGet("Select amount from consumer where id = %s",
+                            (user[0]["consumer"],))
+            consumed = consumer[0]["amount"]
+
+        sessionUser = User(user[0]["id"], email, user[0]["address"], produced, setPrice, consumed)
         session["user"] = sessionUser
 
         return Response('{"ANS":"YES"}')
@@ -100,18 +114,24 @@ def register():
 
         producerID = None
         consumerID = None
+        produced = None
+        setPrice = None
+        consumed = None
 
         if roles["Producer"]:
+            produced = 0
+            setPrice = 0
             producerID = MySQLExecute("Insert into producer(amount,price) values \n(%s, %s)",
                                       (0, 0))
 
         if roles["Consumer"]:
+            consumed = 0
             consumerID = MySQLExecute("Insert into consumer(amount) values \n(%s)",
                                       (0,))
 
         userId = MySQLExecute("Insert into user(name, lastName, email, address, password, salt, producer, consumer)values \n(%s, %s, %s, %s, %s, %s, %s, %s)",
                      (name, lastName, email, address, password, salt, producerID, consumerID))
 
-        session["user"] = User(userId, email, address)
+        session["user"] = User(userId, email, address, produced, setPrice, consumed)
 
         return Response('{"ANS": "YES"}')
