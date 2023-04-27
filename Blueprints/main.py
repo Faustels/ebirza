@@ -1,5 +1,5 @@
-from flask import Blueprint, render_template, session, redirect, request, Response
-from Services.Database.database import MySQLGet
+from flask import Blueprint, render_template, session, redirect, request
+from Services.Database.database import MySQLGet, MySQLExecute
 
 mainBlueprint = Blueprint('mainBlueprint', __name__, template_folder="../templates", static_folder="../static")
 
@@ -8,10 +8,30 @@ def index():
     if "user" not in session:
         return redirect("../", code = 302)
     return render_template("pagrindinis.html", user = session["user"])
+
+@mainBlueprint.route('/pagrindinis/updatePrice', methods = ["POST"])
+def updatePrice():
+    if "user" not in session:
+        return [None]
+    if session["user"].produced == None:
+        return [None]
+
+    newPrice = float(request.get_json())
+    if newPrice < 0 or newPrice > 1:
+        return [None]
+
+    producer = MySQLGet("Select producer from user where id = %s", (session["user"].id,))
+    MySQLExecute("update producer set price = %s where id = %s", (newPrice, producer[0]["producer"]))
+    session["user"].setPrice = newPrice
+
+    return [None]
+
 @mainBlueprint.route('/pagrindinis/getOffers')
 def getData():
     if "user" not in session:
-        return redirect("../../", code=302)
+        return [None]
+    if session["user"].consumed == None:
+        return [None]
     if "price" not in request.args or "amount" not in request.args:
         return [None]
 
