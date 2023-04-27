@@ -78,7 +78,7 @@ def GenerateUser(id, names):
     return User(id + 1, r.choice(names), ''.join([r.choice(ascii_lowercase) for _ in range(5)]), ''.join([r.choice(ascii_lowercase) for _ in range(32)]))
 
 def GenerateProducer(user, index):
-    producer = Producer(index, r.randrange(100), r.randint(1,10000) / 100)
+    producer = Producer(index, r.randrange(100), r.randint(1,1000) / 1000)
     user.producer = index
     return producer
 def GenerateConsumer(user, index):
