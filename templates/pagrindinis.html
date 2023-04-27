@@ -17,15 +17,16 @@
 
 <div class="row">
     <div class="col-8 centered">
+    {% if user.consumed != None: %}
         <h3>Kiti pasiūlymai</h3>
         <div class="row">
             <div class="col-6">
                 <label for="maxPrice" class="form-label" id="priceLabel">Maksimali kaina: 0.2 €/kWh</label>
-                <input style="width:100%" type="range" class="form-range" min="0" max="1" step="0.001" id="maxPrice" value="0.2" oninput="updatePrice()" onchange="updateTable()">
+                <input style="width:100%" type="range" class="form-range" min="0" max="1" step="0.001" id="maxPrice" value="0" oninput="updatePrice()" onchange="updateTable()">
             </div>
             <div class="col-6">
                 <label for="maxAmount" class="form-label" id="amountLabel">Maksimalus kiekis: 20 kWh</label>
-                <input style="width:100%" type="range" class="form-range" min="1" max="1000" step="1" id="maxAmount" value = "20" oninput="updateAmount()" onchange="updateTable()">
+                <input style="width:100%" type="range" class="form-range" min="1" max="1000" step="1" id="maxAmount" value = "1" oninput="updateAmount()" onchange="updateTable()">
             </div>
         </div>
         <table id="offerDataTable" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
@@ -42,36 +43,28 @@
                 </tr>
             </thead>
             <tbody id="offerData">
-                <tr>
-                    <td>Petriukas</td>
-                    <td>10</td>
-                    <td>5</td>
-                    <td class="buyButton">Pirkti</td>
-                </tr>
-                <tr>
-                    <td>Aldona</td>
-                    <td>100</td>
-                    <td>50000</td>
-                    <td class="buyButton">Pirkti</td>
-                </tr>
-                <tr>
-                    <td>Antanas</td>
-                    <td>40</td>
-                    <td>1</td>
-                    <td class="buyButton">Pirkti</td>
-                </tr>
+
             </tbody>
         </table>
+        {% endif %}
     </div>
-    <div class="col-4 centered"">
+    <div class="col-4 centered">
         <h3>Mano duomenys</h3>
+        {%  if user.latitude != None: %}
         <div id="map" style="width: 400px; height: 300px; margin:auto; z-index:-1;" ></div>
+        {% endif %}
+        {% if user.consumed != None: %}
         <h4>Naudojimas</h4>
-        <div class="progress w-50" style="margin:auto">
-            <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
-        </div>
+        {{ user.consumed }} kWh
+        {% endif %}
+        {% if user.produced != None: %}
         <h4>Gaminimas</h4>
-        5 kWh
+        {{ user.produced }} kWh
+        <h4>Naudojimas</h4>
+        {{ user.setPrice }} €/kWh
+        <input style="width:100%" type="range" class="form-range" min="0" max="1" step="0.001" id="maxPrice" value={{ user.setPrice }} oninput="updatePrice()" onchange="updateTable()">
+        <button type="button" class="btn btn-primary">Keisti kainą</button>
+        {% endif %}
     </div>
 </div>
 
@@ -80,6 +73,7 @@
 </body>
 {% include "inserts/common/scripts.html" %}
 <script>
+    {%  if user.latitude != None: %}
     let lat = {{ user.latitude }};
     let lon = {{ user.longitude }};
     var map = L.map('map', {
@@ -94,6 +88,8 @@
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
     var marker = L.marker([lat, lon]).addTo(map);
+    {% endif %}
+    {% if user.consumed != None: %}
     $(document).ready(function () {
         $('#offerDataTable').DataTable( {
         "language": {
@@ -109,7 +105,10 @@
                 "sPrevious": "Ankstesnis"
             },
             "infoFiltered": "(Filtruota iš _MAX_ įrašų)"
-        }
+        },
+        "columnDefs": [
+            { className: "buyButton", "targets": [ 3 ] }
+        ]
     });
         $('.dataTables_length').addClass('bs-select');
     });
@@ -136,16 +135,12 @@
             .then(res => res.json())
             .then(response => {
                 if (response[0] === null) {return}
+                $('#offerDataTable').DataTable().clear();
                 response.forEach((value) => {
-                    temp = "<tr>\n";
-                    temp += "<td>" + value["name"] + "</td>\n";
-                    temp += "<td>" + value["price"].toString() + "</td>\n";
-                    temp += "<td>" + value["amount"].toString() + "</td>\n";
-                    temp += "<td class='buyButton'>Pirkti</td>"
-                    temp += "</tr>\n"
-                    offerData.innerHTML += temp;
+                    $('#offerDataTable').DataTable().row.add([value["name"], value["price"], value["amount"], "Pirkti"]).draw();
                     });
                 });
     }
+    {% endif %}
 </script>
 </html>
