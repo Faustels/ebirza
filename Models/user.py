@@ -7,7 +7,7 @@ class User:
     self.latitude = None
     self.longitude = None
     temp = GetLocations(address).json()
-    if len(temp) != 0:
+    if len(temp["results"]) != 0:
       self.latitude = temp["results"][0]["lat"]
       self.longitude = temp["results"][0]["lon"]
     self.produced = produced
