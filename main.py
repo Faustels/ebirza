@@ -2,6 +2,12 @@ from flask import Flask
 from flask_session import Session
 import os
 import sys
+from Services.Price.PriceController import SetData, SetHour
+from datetime import datetime
+
+#Temporary for now
+SetHour(datetime.now().hour)
+SetData()
 
 #Reading private configuration
 if not os.path.exists("privateConfig.ini"):
@@ -53,6 +59,9 @@ app.register_blueprint(userBlueprint)
 from Blueprints.locationAPI import locationAPIBlueprint
 app.register_blueprint(locationAPIBlueprint)
 
+from Blueprints.assistant import assistantBlueprint
+app.register_blueprint(assistantBlueprint)
+
 
 # Page setup
 from Blueprints.index import indexBlueprint
@@ -64,7 +73,7 @@ app.register_blueprint(mainBlueprint)
 from Blueprints.orai import oraiBlueprint
 app.register_blueprint(oraiBlueprint)
 
-from Blueprints.assistant import assistantBlueprint
-app.register_blueprint(assistantBlueprint)
+from Blueprints.price import priceBlueprint
+app.register_blueprint(priceBlueprint)
 
 app.run()
