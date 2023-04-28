@@ -115,10 +115,34 @@ def GetParts(splitData):
             break
         currentPos += 1
 
+    prevBuy = None
+    prevSell = None
+    for i in range(currentPos - 1, 0, -1):
+        if splitData[i][1] is not None and prevBuy is None and splitData[i][1] != lastBuy[1]:
+            prevBuy = [splitData[i][0], splitData[i][1]]
+        if splitData[i][2] is not None and prevSell is None and splitData[i][2] != lastSell[1]:
+            prevSell = [splitData[i][0], splitData[i][2]]
+        if prevBuy is not None and prevSell is not None:
+            break
+
+    price = GetCross([prevBuy, lastBuy], [prevSell, lastSell])
+
     if currentPos + splitAmount / 2 >= len(splitData):
         currentPos = len(splitData) - (splitAmount / 2)
     elif currentPos < splitAmount / 2:
         currentPos = splitAmount / 2
 
-    return splitData[int(currentPos - splitAmount / 2): int(currentPos + splitAmount / 2)]
+    return splitData[int(currentPos - splitAmount / 2): int(currentPos + splitAmount / 2)], price
+
+def GetCross(line1, line2):
+    line1Mult = (line1[1][1] - line1[0][1]) / (line1[1][0] - line1[0][0])
+    line2Mult = (line2[1][1] - line2[0][1]) / (line2[1][0] - line2[0][0])
+
+    line1Null = line1[0][1] - line1[0][0] * line1Mult
+    line2Null = line2[0][1] - line2[0][0] * line2Mult
+
+    price = (line1Null - line2Null) / (line2Mult - line1Mult)
+
+    return price
+
 

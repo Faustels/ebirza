@@ -12,7 +12,37 @@
 {% include "inserts/common/assistant.html" %}
 {% include "inserts/common/navigation.html" %}
 
-    <div id="priceChart" style="width: 900px; height: 500px"></div>
+<div class="row">
+    <div class="col-9" id="priceChart" style="width: 900px; height: 500px"></div>
+
+    <div class="col-3">
+        <div id="produceLabel">Pagaminamas elektros kiekis: 0 kWh</div>
+        <input style="width:100%" type="range" class="form-range" min="0" max="1000" step="1" id="produceSlider" value='0' oninput="updateProduceLabel()" onchange="getData()">
+        <div id="consumeLabel">Sunaudojamas elektros kiekis: 0 kWh</div>
+        <input style="width:100%" type="range" class="form-range" min="0" max="1000" step="1" id="consumeSlider" value='0' oninput="updateConsumeLabel()" onchange="getData()">
+    </div>
+</div>
+
+<div class="row mapStatisticContainer">
+    <div class="col-sm-4" style="background-color:dodgerblue">
+        <div>
+            <p>Jūsų namų ūkiui siūloma kaina</p>
+            <h3 id="priceDisplay"></h3>
+        </div>
+        <div>
+            <i class="icon bi-hand-thumbs-up"></i>
+        </div>
+    </div>
+    <div class="col-sm-4" style="background-color:dodgerblue">
+        <div>
+            <p>Jūsų namų ūkio elektros suvarotjimo perteklius</p>
+            <h3 id="excessLabel">0 kWh</h3>
+        </div>
+        <div>
+            <i class="icon bi-lightning"></i>
+        </div>
+    </div>
+</div>
 
 
 {% include "inserts/common/footer.html" %}
@@ -21,17 +51,19 @@
 {% include "inserts/common/scripts.html" %}
 <script>
     function getData() {
+        let excess = $("#produceSlider")[0].value - $("#consumeSlider")[0].value;
         fetch("/kaina/getPrice", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(0)
+            body: JSON.stringify(excess / 1000)
         })
             .then(res => res.text())
             .then(response => {
                 let data = JSON.parse(response);
-                draw(data);
+                draw(data["Graph"]);
+                setPrice(data["Price"]);
             });
 
     }
@@ -64,6 +96,24 @@
 
             chart.draw(newDataTable, options);
         }
+    }
+
+    function setPrice(price){
+        $("#priceDisplay")[0].innerHTML = price.toString() + " €/mWh"
+    }
+
+    function updateProduceLabel(){
+        $("#produceLabel")[0].innerHTML = "Pagaminamas elektros kiekis: " + $("#produceSlider")[0].value.toString() + " kWh";
+        let excess = $("#produceSlider")[0].value - $("#consumeSlider")[0].value;
+        if (excess < 0) { excess = 0;};
+        $("#excessLabel")[0].innerHTML = excess.toString() + " kWh";
+    }
+
+    function updateConsumeLabel(){
+        $("#consumeLabel")[0].innerHTML = "Sunaudojamas elektros kiekis: " + $("#consumeSlider")[0].value.toString() + " kWh";
+        let excess = $("#produceSlider")[0].value - $("#consumeSlider")[0].value;
+        if (excess < 0) { excess = 0;};
+        $("#excessLabel")[0].innerHTML = excess.toString() + " kWh";
     }
     getData();
 </script>

@@ -9,5 +9,7 @@ def index():
 
 @priceBlueprint.route("/kaina/getPrice", methods = ["POST"])
 def price():
-    mWh = int(request.get_json())
-    return GetData(mWh)
+    mWh = float(request.get_json())
+    graph, price = GetData(mWh)
+    data = {"Graph" : graph, "Price" : price}
+    return data
