@@ -44,7 +44,7 @@ def login():
         if not ValidEmail(email):
             return Response('{"ANS":"NO", "ERROR":"Blogas pašto adresas"}')
 
-        user = MySQLGet("Select password, id, address, salt, producer, consumer from user where email = %s", (email,))
+        user = MySQLGet("Select password, id, address, salt, producer, consumer, balance from user where email = %s", (email,))
         if len(user) == 0:
             return Response('{"ANS":"NO", "ERROR":"Naudotojas neegzistuoja"}')
 
@@ -66,7 +66,7 @@ def login():
                             (user[0]["consumer"],))
             consumed = consumer[0]["amount"]
 
-        sessionUser = User(user[0]["id"], email, user[0]["address"], produced, setPrice, consumed)
+        sessionUser = User(user[0]["id"], email, user[0]["address"], produced, setPrice, consumed, user[0]["balance"])
         session["user"] = sessionUser
 
         return Response('{"ANS":"YES"}')

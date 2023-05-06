@@ -1,6 +1,6 @@
 from Services.Location.locationAPI import GetLocations
 class User:
-  def __init__(self, id, email, address, produced, setPrice, consumed):
+  def __init__(self, id, email, address, produced, setPrice, consumed, balance):
     self.id = id
     self.email = email
     self.address = address
@@ -13,3 +13,4 @@ class User:
     self.produced = produced
     self.setPrice = setPrice
     self.consumed = consumed
+    self.balance = balance

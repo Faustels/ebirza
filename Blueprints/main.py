@@ -59,3 +59,22 @@ def getData():
         result.append(tempRes)
 
     return result
+
+@mainBlueprint.route('/pagrindinis/buyEnergy', methods = ["POST"])
+def buyEnergy():
+    if "user" not in session:
+        return [None]
+    if session["user"].consumed == None:
+        return [None]
+
+    producerId = int(request.get_json())
+    consumed = session["user"].consumed
+    res = MySQLGet("select id from producer, amount where id = %s", (producerId,))
+
+    if len(res) == 0:
+        return [None]
+
+
+
+
+
