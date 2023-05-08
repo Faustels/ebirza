@@ -55,7 +55,7 @@
         {% endif %}
         {% if user.isConsumer == True: %}
         <h4>Naudojimas</h4>
-        {{ userData["consumedAmount"] }} kWh
+            <div id ="consumedLabel">{{ userData["consumedAmount"] }} kWh </div>
         {% endif %}
         {% if user.isProducer == True: %}
         <h4>Gaminimas</h4>
@@ -109,11 +109,21 @@
             "infoFiltered": "(Filtruota iš _MAX_ įrašų)"
         },
         "columnDefs": [
-            { className: "buyButton", "targets": [ 3 ] }
+            { className: "buyButton", "targets": [ 3 ] },
+            { target: 4, visible: false, searchable: false},
         ]
     });
         $('.dataTables_length').addClass('bs-select');
     });
+
+    $('#offerDataTable').on('click', '.buyButton', function () {
+		var table = $('#offerDataTable').DataTable();
+        buyEnergy(table.row($(this).parents("tr")).data()[4])
+		table
+			.row($(this).parents('tr'))
+			.remove()
+		.draw();
+		});
 
     var priceInput = $("#maxPrice")[0];
     var amountInput = $("#maxAmount")[0];
@@ -122,6 +132,7 @@
     var amountLabel = $("#amountLabel")[0];
 
     var offerData = $("#offerData")[0];
+    var consumedLabel = $("#consumedLabel")[0];
 
     function updatePrice(){
         priceLabel.innerHTML = "Maksimali kaina: " + priceInput.value.toString() + " €/kWh";
@@ -139,9 +150,24 @@
                 if (response[0] === null) {return}
                 $('#offerDataTable').DataTable().clear();
                 response.forEach((value) => {
-                    $('#offerDataTable').DataTable().row.add([value["name"], value["price"], value["amount"], "Pirkti"]).draw();
+                    $('#offerDataTable').DataTable().row.add([value["name"], value["price"], value["amount"], "Pirkti", value["id"]]).draw();
                     });
                 });
+    }
+
+    function buyEnergy(id) {
+        fetch("/pagrindinis/buyEnergy", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(id)
+        })
+            .then(res => res.json())
+            .then(response => {
+                if (response[0] == null) {return;}
+                consumedLabel.innerHTML = response[0].toString() + " kWh";
+            });
     }
     {% endif %}
 
