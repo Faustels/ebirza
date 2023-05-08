@@ -89,33 +89,36 @@ def getData():
 def buyEnergy():
     if "user" not in session:
         return [None]
-    if session["user"].isProducer == False:
+    if not session["user"].isProducer:
         return [None]
 
     lock.acquire()
 
     producerId = int(request.get_json())
-    res = MySQLGet("select id from producer, amount, price where id = %s", (producerId,))
+    res = MySQLGet("select amount, price from producer where id = %s", (producerId,))
 
     if len(res) == 0:
         lock.release()
         return [None]
 
     amountBought = res[0]["amount"]
-    price = amountBought * res[0]["price"]
+    price = amountBought * float(res[0]["price"])
     if amountBought <= 0:
         lock.release()
         return [None]
 
-    MySQLExecute("update user set balance = balance + %s, amount = 0 where producer = %s",
+    MySQLExecute("update producer set amount = 0 where id = %s", (producerId,))
+    MySQLExecute("update user set balance = balance + %s where producer = %s",
                  (price - amountBought * moneyTaken, producerId))
 
-    MySQLExecute("update user set balance = balance - %s where id = %s", (price, session["user"]["id"]))
+    MySQLExecute("update user set balance = balance - %s where id = %s", (price, session["user"].id))
 
-    consumerId = MySQLGet("select consumer from user where id = %s", (session["user"]["id"],))
+    consumerId = MySQLGet("select consumer from user where id = %s", (session["user"].id,))[0]["consumer"]
 
     MySQLExecute("update consumer set amount = amount + %s where id = %s", (amountBought, consumerId))
 
+    newAmount = MySQLGet("select amount from consumer where id = %s", (consumerId,))[0]["amount"]
+
     lock.release()
 
-    return [True]
+    return [newAmount]
