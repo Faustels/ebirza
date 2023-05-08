@@ -50,13 +50,14 @@ h4{
     margin-right: 0px;
 }
 
-.buyButton:hover{
+td.buyButton:hover{
     background-color: #007bff;
     color: white;
+    cursor: pointer;
 }
 
-.buyButton:active{
-    background-color:#7eb7f2;
+td.buyButton:active{
+    background-color:#7eb7f2 !important;
 }
 
 .mapG {

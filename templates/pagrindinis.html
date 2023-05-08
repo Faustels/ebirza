@@ -17,7 +17,7 @@
 
 <div class="row">
     <div class="col-8 centered">
-    {% if user.consumed != None: %}
+    {% if user.isConsumer == True: %}
         <h3>Kiti pasiūlymai</h3>
         <div class="row">
             <div class="col-6">
@@ -53,16 +53,16 @@
         {%  if user.latitude != None: %}
         <div id="map" style="width: 400px; height: 300px; margin:auto; z-index:1;" ></div>
         {% endif %}
-        {% if user.consumed != None: %}
+        {% if user.isConsumer == True: %}
         <h4>Naudojimas</h4>
-        {{ user.consumed }} kWh
+            <div id ="consumedLabel">{{ userData["consumedAmount"] }} kWh </div>
         {% endif %}
-        {% if user.produced != None: %}
+        {% if user.isProducer == True: %}
         <h4>Gaminimas</h4>
-        {{ user.produced }} kWh
+        {{ userData["producedAmount"] }} kWh
         <h4 id="producerActionLabel">Kaina</h4>
-        <div id="producerPriceLabel">{{ user.setPrice }} €/kWh </div>
-        <input style="width:100%; display:none" type="range" class="form-range" min="0" max="1" step="0.001" id="priceSlider" value='{{ user.setPrice }}' oninput="updateProducerLabel()">
+        <div id="producerPriceLabel">{{ userData["price"] }} €/kWh </div>
+        <input style="width:100%; display:none" type="range" class="form-range" min="0" max="1" step="0.001" id="priceSlider" value='{{ userData["price"] }}' oninput="updateProducerLabel()">
         <button type="button" id="startChangeButton" class="btn btn-primary" onclick="startChangePrice()">Keisti kainą</button>
         <button style="display: none" id="changePriceButton" type="button" class="btn btn-primary" onclick="changePrice()">Išsaugoti</button>
         <button style="display: none" id="stopChangeButton" type="button" class="btn btn-secondary" onclick="stopChangePrice()">Atšaukti</button>
@@ -91,7 +91,7 @@
 }).addTo(map);
     var marker = L.marker([lat, lon]).addTo(map);
     {% endif %}
-    {% if user.consumed != None: %}
+    {% if user.isConsumer == True: %}
     $(document).ready(function () {
         $('#offerDataTable').DataTable( {
         "language": {
@@ -109,11 +109,21 @@
             "infoFiltered": "(Filtruota iš _MAX_ įrašų)"
         },
         "columnDefs": [
-            { className: "buyButton", "targets": [ 3 ] }
+            { className: "buyButton", "targets": [ 3 ] },
+            { target: 4, visible: false, searchable: false},
         ]
     });
         $('.dataTables_length').addClass('bs-select');
     });
+
+    $('#offerDataTable').on('click', '.buyButton', function () {
+		var table = $('#offerDataTable').DataTable();
+        buyEnergy(table.row($(this).parents("tr")).data()[4])
+		table
+			.row($(this).parents('tr'))
+			.remove()
+		.draw();
+		});
 
     var priceInput = $("#maxPrice")[0];
     var amountInput = $("#maxAmount")[0];
@@ -122,6 +132,7 @@
     var amountLabel = $("#amountLabel")[0];
 
     var offerData = $("#offerData")[0];
+    var consumedLabel = $("#consumedLabel")[0];
 
     function updatePrice(){
         priceLabel.innerHTML = "Maksimali kaina: " + priceInput.value.toString() + " €/kWh";
@@ -139,20 +150,35 @@
                 if (response[0] === null) {return}
                 $('#offerDataTable').DataTable().clear();
                 response.forEach((value) => {
-                    $('#offerDataTable').DataTable().row.add([value["name"], value["price"], value["amount"], "Pirkti"]).draw();
+                    $('#offerDataTable').DataTable().row.add([value["name"], value["price"], value["amount"], "Pirkti", value["id"]]).draw();
                     });
                 });
     }
+
+    function buyEnergy(id) {
+        fetch("/pagrindinis/buyEnergy", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(id)
+        })
+            .then(res => res.json())
+            .then(response => {
+                if (response[0] == null) {return;}
+                consumedLabel.innerHTML = response[0].toString() + " kWh";
+            });
+    }
     {% endif %}
 
-    {% if user.produced != None: %}
+    {% if user.isProducer == True: %}
     var priceSlider = $("#priceSlider")[0];
     var startChangeButton = $("#startChangeButton")[0];
     var changePriceButton = $("#changePriceButton")[0];
     var stopChangeButton = $("#stopChangeButton")[0];
     var producerActionLabel = $("#producerActionLabel")[0];
     var producerPriceLabel =  $("#producerPriceLabel")[0];
-    var currentPrice = {{ user.setPrice }};
+    var currentPrice = {{ userData["price"] }};
     function startChangePrice() {
         priceSlider.style.display = "inline-block";
         startChangeButton.style.display = "none";
