@@ -7,17 +7,35 @@ moneyTaken = 0.02
 
 mainBlueprint = Blueprint('mainBlueprint', __name__, template_folder="../templates", static_folder="../static")
 
+
+def getUserData():
+    data = {}
+
+    userData = MySQLGet("Select producer, consumer from user where id = %s", (session["user"].id,))
+    if userData[0]["consumer"] is not None:
+        consumerData = MySQLGet("Select amount from consumer where id = %s", (userData[0]["consumer"],))
+        data["consumedAmount"] = consumerData[0]["amount"]
+
+    if userData[0]["producer"] is not None:
+        producerData = MySQLGet("Select amount, price from producer where id = %s", (userData[0]["producer"],))
+        data["producedAmount"] = producerData[0]["amount"]
+        data["price"] = producerData[0]["price"]
+
+    return data
+
+
 @mainBlueprint.route('/pagrindinis')
 def index():
     if "user" not in session:
-        return redirect("../", code = 302)
-    return render_template("pagrindinis.html", user = session["user"])
+        return redirect("../", code=302)
+    return render_template("pagrindinis.html", user=session["user"], userData=getUserData())
 
-@mainBlueprint.route('/pagrindinis/updatePrice', methods = ["POST"])
+
+@mainBlueprint.route('/pagrindinis/updatePrice', methods=["POST"])
 def updatePrice():
     if "user" not in session:
         return [None]
-    if session["user"].produced == None:
+    if session["user"].isProducer == False:
         return [None]
 
     newPrice = float(request.get_json())
@@ -26,15 +44,15 @@ def updatePrice():
 
     producer = MySQLGet("Select producer from user where id = %s", (session["user"].id,))
     MySQLExecute("update producer set price = %s where id = %s", (newPrice, producer[0]["producer"]))
-    session["user"].setPrice = newPrice
 
     return [None]
+
 
 @mainBlueprint.route('/pagrindinis/getOffers')
 def getData():
     if "user" not in session:
         return [None]
-    if session["user"].consumed == None:
+    if session["user"].isConsumer == False:
         return [None]
     if "price" not in request.args or "amount" not in request.args:
         return [None]
@@ -48,8 +66,9 @@ def getData():
     price = float(request.args.get("price"))
     amount = int(request.args.get("amount"))
 
-    res = MySQLGet("select name, lastName, price, amount, producer.id as id from producer inner join user on user.producer = producer.id" +
-                          " where price > 0 and amount > 0 and price < %s and amount < %s", (price, amount))
+    res = MySQLGet(
+        "select name, lastName, price, amount, producer.id as id from producer inner join user on user.producer = producer.id" +
+        " where price > 0 and amount > 0 and price < %s and amount < %s", (price, amount))
 
     if len(res) == 0:
         return [None]
@@ -65,11 +84,12 @@ def getData():
 
     return result
 
-@mainBlueprint.route('/pagrindinis/buyEnergy', methods = ["POST"])
+
+@mainBlueprint.route('/pagrindinis/buyEnergy', methods=["POST"])
 def buyEnergy():
     if "user" not in session:
         return [None]
-    if session["user"].consumed == None:
+    if session["user"].isProducer == False:
         return [None]
 
     lock.acquire()
@@ -99,9 +119,3 @@ def buyEnergy():
     lock.release()
 
     return [True]
-
-
-
-
-
-

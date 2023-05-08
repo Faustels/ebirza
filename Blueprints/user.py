@@ -51,22 +51,17 @@ def login():
         if not RightPassword(request.form.get("loginPassword"), user[0]['salt'], user[0]['password']):
             return Response('{"ANS":"NO", "ERROR":"Blogas slaptažodis"}')
 
-        produced = None
-        setPrice = None
-        consumed = None
-
-        if user[0]["producer"] != None:
-            producer = MySQLGet("Select amount, price from producer where id = %s",
-                            (user[0]["producer"],))
-            produced = producer[0]["amount"]
-            setPrice = producer[0]["price"]
+        isConsumer = False
+        isProducer = False
 
         if user[0]["consumer"] != None:
-            consumer = MySQLGet("Select amount from consumer where id = %s",
-                            (user[0]["consumer"],))
-            consumed = consumer[0]["amount"]
+            isConsumer = True
 
-        sessionUser = User(user[0]["id"], email, user[0]["address"], produced, setPrice, consumed, user[0]["balance"])
+        if user[0]["producer"] != None:
+            isProducer = True
+
+
+        sessionUser = User(user[0]["id"], email, user[0]["address"], isConsumer, isProducer)
         session["user"] = sessionUser
 
         return Response('{"ANS":"YES"}')
@@ -112,26 +107,24 @@ def register():
         salt = ''.join([r.choice(ascii_lowercase) for _ in range(32)])
         password = sha256((request.form.get("registerPassword") + salt).encode('utf-8')).hexdigest()
 
-        producerID = None
         consumerID = None
-        produced = None
-        setPrice = None
-        consumed = None
-
-        if roles["Producer"]:
-            produced = 0
-            setPrice = 0
-            producerID = MySQLExecute("Insert into producer(amount,price) values \n(%s, %s)",
-                                      (0, 0))
+        producerID = None
+        isConsumer = False
+        isProducer = False
 
         if roles["Consumer"]:
-            consumed = 0
+            isConsumer = True
             consumerID = MySQLExecute("Insert into consumer(amount) values \n(%s)",
                                       (0,))
+
+        if roles["Producer"]:
+            isProducer = True
+            producerID = MySQLExecute("Insert into producer(amount,price) values \n(%s, %s)",
+                                      (0, 0))
 
         userId = MySQLExecute("Insert into user(name, lastName, email, address, password, salt, producer, consumer)values \n(%s, %s, %s, %s, %s, %s, %s, %s)",
                      (name, lastName, email, address, password, salt, producerID, consumerID))
 
-        session["user"] = User(userId, email, address, produced, setPrice, consumed)
+        session["user"] = User(userId, email, address, isConsumer, isProducer)
 
         return Response('{"ANS": "YES"}')
