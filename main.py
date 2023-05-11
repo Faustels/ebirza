@@ -76,4 +76,5 @@ app.register_blueprint(oraiBlueprint)
 from Blueprints.price import priceBlueprint
 app.register_blueprint(priceBlueprint)
 
-app.run()
+if __name__ == "__main__":
+    app.run()
