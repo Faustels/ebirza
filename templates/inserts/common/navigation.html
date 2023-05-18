@@ -7,44 +7,49 @@
 {% endif %}
 
 <div class="container">
-    <nav class="navbar navbar-expand navbar-dark bg-primary fixed-top">
-        <div class="collapse navbar-collapse">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <button type="button" class="btn btn-primary">
-                        Apie mus
-                    </button>
-                </li>
-                <li class="nav-item">
-                    <button type="button" class="btn btn-primary">
-                        DUK
-                    </button>
-                </li>
+    <nav class="navbar navbar-expand-lg fixed-top navigationBar">
+        <div class="navbar-brand">
+            <img class="logo" src="/static/images/logo.png" alt="Avatar">
+        </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-card-list" style="font-size:3rem;"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav navbarList ml-auto">
+                <div>
+                    <li class="nav-item">
+                        <a href="kaina" class="navbarPageLinks"> APIE MUS</a>
+                    </li>
+                </div>
+                <div>
+                    <li class="nav-item">
+                        <a href="kaina" class="navbarPageLinks"> PASLAUGOS</a>
+                    </li>
+                </div>
+                <div>
+                    <li class="nav-item">
+                        <a href="kaina" class="navbarPageLinks"> PATARIMAI</a>
+                    </li>
+                </div>
+                {% if user is not defined: %}
+                <div>
+                    <li class="nav-item">
+                        <button type="button" class="navbarButton" data-toggle="modal" data-target="#loginModal">
+                            PRISIJUNGTI
+                        </button>
+                    </li>
+                </div>
+                {% else %}
+                <div>
+                    <li class="nav-item">
+                        <button type="button" class="navbarButton" onclick="return logout()">
+                            ATSIJUNGTI
+                        </button>
+                    </li>
+                </div>
+                {% endif %}
             </ul>
         </div>
-        {% if user is not defined: %}
-        <div>
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">
-                        Prisijungti
-                    </button>
-                </li>
-                <li class="nav-item">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#registerModal">
-                        Registruotis
-                    </button>
-                </li>
-            </ul>
-        </div>
-        {% else %}
-        <div style="color: white">
-            <button type="button" class="btn btn-primary" onclick="return logout()">
-                Atsijungti
-            </button>
-            Aš  <img class="userImage" src="/static/images/avatar.png" alt="Avatar">
-        </div>
-        {% endif %}
     </nav>
 </div>
 

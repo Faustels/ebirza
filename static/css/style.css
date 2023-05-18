@@ -1,5 +1,6 @@
 :root {
     --site-color: #f2f2f2;
+    --dark-green-color:#347571;
 }
 
 body {
@@ -233,4 +234,34 @@ td.buyButton:active{
     width:5rem;
     height:5rem;
     cursor: pointer;
+}
+
+.navigationBar {
+    background-color: #ECF8E5;
+}
+
+a {
+    color: var(--dark-green-color);
+    font-weight: bold;
+}
+
+.navbarPageLinks {
+    text-decoration: underline;
+}
+
+.navbarList div {
+    padding: 1.5rem 3rem;
+}
+
+.navbarButton {
+    background-color: transparent;
+    border-width: 0;
+    color: var(--dark-green-color);
+    font-weight: bold;
+    padding: 0;
+}
+
+.logo {
+    height:3rem;
+    width: auto;
 }
