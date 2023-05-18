@@ -238,6 +238,7 @@ td.buyButton:active{
 
 .navigationBar {
     background-color: #ECF8E5;
+    padding: 0 3rem;
 }
 
 a {
@@ -250,7 +251,7 @@ a {
 }
 
 .navbarList div {
-    padding: 1.5rem 3rem;
+    padding: 1.5rem 2.5rem;
 }
 
 .navbarButton {
