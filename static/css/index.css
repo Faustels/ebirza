@@ -22,13 +22,13 @@
 
 @media (min-width: 1200px){
     :root {
-        --textSize: 16px;
+        --textSize: 14px;
     }
 }
 
 @media (min-width: 1366px){
     :root {
-        --textSize: 18px;
+        --textSize: 16px;
     }
 }
 
@@ -64,7 +64,7 @@
 
 .indexContainer{
     background-color: var(--light-green-color);
-    padding:0 0 0 calc(8 * var(--textSize))
+    padding:0 calc(8 * var(--textSize))
 }
 
 .roundedBottom{
