@@ -1,0 +1,41 @@
+:root{
+    --textSize: 10px;
+}
+
+@media (min-width: 768px){
+    :root {
+        --textSize: 11px;
+    }
+}
+
+@media (min-width: 992px){
+    :root {
+        --textSize: 14px;
+    }
+}
+
+@media (min-width: 1200px){
+    :root {
+        --textSize: 15px;
+    }
+}
+
+@media (min-width: 1366px){
+    :root {
+        --textSize: 16px;
+    }
+}
+
+.adviceContainer{
+    color: var(--dark-green-color);
+    padding:2vh 3vw;
+    text-align: justify;
+    font-size: calc(1.5 * var(--textSize));
+    line-height: 1.8;
+    text-indent: calc(2 *var(--textSize));
+}
+
+.listContainer{
+    padding: 3vh 5vw;
+    text-indent: 0;
+}
