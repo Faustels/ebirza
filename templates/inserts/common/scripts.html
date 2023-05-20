@@ -11,10 +11,9 @@
 <script>
     {% include "inserts/common/assistantFunctions.js" %}
     {% if user is not defined: %}
-        {% include "inserts/userControl/loggedOutFunctions.js" %}
-        {% include "inserts/location/autocomplete.js" %}
+        {% include "inserts/userControl/login.js" %}
     {% else %}
-        {% include "inserts/userControl/loggedInFunctions.js" %}
+        {% include "inserts/userControl/logout.js" %}
     {% endif %}
 </script>
 </html>
