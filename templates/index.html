@@ -4,27 +4,46 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 <link rel="stylesheet" type="text/css"    href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css"></link>
-<link rel="stylesheet" href="/static/css/style.css">
+<link rel="stylesheet" href="/static/css/root.css">
+<link rel="stylesheet" href="/static/css/navbar.css">
+<link rel="stylesheet" href="/static/css/footer.css">
+<link rel="stylesheet" href="/static/css/assistant.css">
+<link rel="stylesheet" href="/static/css/userModals.css">
+<link rel="stylesheet" href="/static/css/index.css">
 <title>Puslapis</title>
 </head>
 <body class="d-flex flex-column min-vh-100">
 {% include "inserts/common/assistant.html" %}
 {% include "inserts/common/navigation.html" %}
+{% if user is not defined: %}
+{% include "inserts/userControl/registrationModal.html" %}
+{% endif %}
 
-<div id="Apie_mus" class="row justify-content-lg-center">
-    <h1>Apie mus</h1>
-    <div class="row justify-content-lg-center">
-        <div class="col col-lg-6">
-            ShinyTrade Lietuva yra produktas, skirtas žaliąją energiją gaminantiems bei vartojantiems Lietuvos gyventojas.
-Šis produktas – tai platforma, kuri palengvina elektros pirkimą ir pardavimą tarp įvairių elektros rinkos dalyvių.
-Šiame puslapyje realiu laiku pateikiama informacija apie elektros pasiūlą ir paklausą, esamas kainas ir rinkos tendencijas.
+<div style="display:flex; flex-direction: column; flex-grow: 1;">
+    <div id="Apie_mus" class="row justify-content-lg-center indexContainer">
+        <div class="row justify-content-lg-center" >
+            <div class="col col-xl-6 col-lg-6 col-md-6 col-12 bigText">
+                <div>
+                    Saulės energijos perteklius - patikima, tvari ir ekologiška energija jūsų   namams.
+                </div>
+                <button class="registerButton" data-toggle="modal" data-target="#registerModal"> Registracija</button>
+            </div>
+            <div class="col col-xl-6 col-lg-6 col-md-6 col-12">
+                <img class="centerImage" src="/static/images/register.png" alt="register.png">
+            </div>
         </div>
     </div>
-</div>
+    <div class="roundedBottom" style="flex-grow:1;">
 
+    </div>
+</div>
 
 {% include "inserts/common/footer.html" %}
 
 </body>
 {% include "inserts/common/scripts.html" %}
+<script>
+    {% include "inserts/location/autocomplete.js" %}
+    {% include "inserts/userControl/register.js" %}
+</script>
 </html>
