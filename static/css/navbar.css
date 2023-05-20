@@ -3,12 +3,9 @@
     padding: 1rem 3rem;
 }
 
-a {
+.navbarPageLinks {
     color: var(--dark-green-color);
     font-weight: bold;
-}
-
-.navbarPageLinks {
     text-decoration: underline;
 }
 
