@@ -67,6 +67,9 @@ app.register_blueprint(assistantBlueprint)
 from Blueprints.index import indexBlueprint
 app.register_blueprint(indexBlueprint)
 
+from Blueprints.about import aboutBlueprint
+app.register_blueprint(aboutBlueprint)
+
 from Blueprints.main import mainBlueprint
 app.register_blueprint(mainBlueprint)
 
