@@ -1,6 +1,6 @@
 .assistantUserMessage {
     align-self: flex-end;
-    background-color: dodgerblue;
+    background-color: var(--medium-green-color);
     color:white;
     margin: 0.5rem 0.5rem 1rem 1.5rem;
 }
@@ -47,7 +47,7 @@
 }
 
 .assistantSubmit:hover{
-    background-color: dodgerblue;
+    background-color: var(--medium-green-color);
     color: white;
 }
 
@@ -66,14 +66,14 @@
 }
 
 .assistantBar {
-    background-color: dodgerblue;
+    background-color: var(--medium-green-color);
     display: flex;
     justify-content: flex-end;
 }
 
 .assistantExit {
     border-width: 0;
-    background-color: dodgerblue;
+    background-color: var(--medium-green-color);
     margin-right: 0.25rem;
 }
 
