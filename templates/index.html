@@ -22,7 +22,9 @@
                 <div>
                     Saulės energijos perteklius - patikima, tvari ir ekologiška energija jūsų   namams.
                 </div>
+                {% if user is not defined: %}
                 <button class="registerButton" data-toggle="modal" data-target="#registerModal"> Registracija</button>
+                {% endif %}
             </div>
             <div class="col col-xl-6 col-lg-6 col-md-6 col-12">
                 <img class="centerImage" src="/static/images/register.png" alt="register.png">

@@ -16,7 +16,11 @@
     <div id="Apie_mus" class="row justify-content-lg-center aboutContainer">
         <div class="row justify-content-lg-center" servicesContainer>
             <div class="col col-xl-4 col-lg-4 col-12 singleServiceContainer">
-                <a href="/" class="singleServiceLink">
+                {% if user is not defined: %}
+                <a class="singleServiceLink">
+                {% else: %}
+                <a href="pagrindinis" class="singleServiceLink">
+                {% endif %}
                     <div class="row">
                         <div class="col col-xl-12 col-lg-12 col-4 serviceImageContainer">
                             <img class="serviceImage" src="/static/images/sell.png" alt="sell.png">
@@ -26,6 +30,9 @@
                             <div class="serviceDescription">
                                 Mūsų platforma atlieka tarpinko vaidmenį, suvesdama norinčius
                                 pirkti ir parduoti saulės energijos perteklių klientus.
+                                {% if user is not defined: %}
+                                (Registracija privaloma)
+                                {% endif %}
                             </div>
                         </div>
                     </div>

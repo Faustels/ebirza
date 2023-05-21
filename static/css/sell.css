@@ -1,0 +1,9 @@
+td.buyButton:hover{
+    background-color: var(--medium-green-color);
+    color: white;
+    cursor: pointer;
+}
+
+td.buyButton:active{
+    background-color: var(--dark-green-color) !important;
+}
