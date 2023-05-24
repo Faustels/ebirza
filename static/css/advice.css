@@ -15,3 +15,11 @@
     padding: 3vh 7vw;
     text-indent: 0;
 }
+
+.adviceImage{
+    position: fixed;
+    bottom: 15vh;
+    right: 0;
+    z-index: -10000;
+    opacity: 0.4
+}
