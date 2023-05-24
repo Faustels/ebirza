@@ -4,11 +4,8 @@ import os
 import sys
 from Services.Price.PriceController import SetHour, SetupNewData
 from Services.Scheduler.scheduler import newSchedule
-
-SetupNewData()
-newSchedule(60 * 60 * 24, 2, SetupNewData)
-newSchedule(60 * 60, 2, SetHour)
-#Temporary for now
+from Services.Weather.WeatherAPI import PrepareWeatherAPI, UpdateData, GeneratePredictions
+from datetime import datetime
 
 #Reading private configuration
 if not os.path.exists("privateConfig.ini"):
@@ -52,6 +49,11 @@ app.config['MYSQL_PASSWORD'] = database['MYSQL_PASSWORD']
 app.config['MYSQL_DB'] = database['MYSQL_DB']
 
 mysql.init_app(app)
+
+#Price setup
+SetupNewData()
+newSchedule(60 * 60 * 24, 2, SetupNewData)
+newSchedule(60 * 60, 2, SetHour)
 
 #Request setup
 from Blueprints.user import userBlueprint
