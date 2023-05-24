@@ -7,4 +7,4 @@ def newSchedule(seconds, offset, function):
         function()
     scheduler = sched.scheduler(time.time, time.sleep)
     scheduler.enter(seconds - ((time.time() - offset) % seconds), 1, ScheduledFunction, (seconds, function, scheduler))
-    scheduler.run()
+    scheduler.run(blocking=False)
