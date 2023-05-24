@@ -16,7 +16,7 @@ def DownloadData():
         shutil.copyfileobj(response.raw, out_file)
 
 def CreateData():
-    subprocess.Popen("Rscript Price.R", cwd ="Services/Price", stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    subprocess.Popen(("Rscript",  "Price.R"), cwd ="Services/Price", stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 def SetupNewData():
     DownloadData()
