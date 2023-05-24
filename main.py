@@ -2,14 +2,13 @@ from flask import Flask
 from flask_session import Session
 import os
 import sys
-from Services.Price.PriceController import SetData, SetHour, SetupNewData
-from datetime import datetime
+from Services.Price.PriceController import SetHour, SetupNewData
 from Services.Scheduler.scheduler import newSchedule
 
-newSchedule(5, 2, SetupNewData)
+SetupNewData()
+newSchedule(60 * 60 * 24, 2, SetupNewData)
+newSchedule(60 * 60, 2, SetHour)
 #Temporary for now
-SetHour(datetime.now().hour)
-SetData()
 
 #Reading private configuration
 if not os.path.exists("privateConfig.ini"):

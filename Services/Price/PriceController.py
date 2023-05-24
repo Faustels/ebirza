@@ -17,16 +17,17 @@ def DownloadData():
         shutil.copyfileobj(response.raw, out_file)
 
 def CreateData():
-    subprocess.Popen("Rscript Price.R", cwd = os.getcwd() + "/Services/Price", stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, creationflags=CREATE_NO_WINDOW)
+    subprocess.Popen("Rscript Price.R", cwd ="Services/Price", stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, creationflags=CREATE_NO_WINDOW)
 
 def SetupNewData():
     DownloadData()
-
     CreateData()
+    SetHour()
 
-def SetHour(h):
+def SetHour():
     global currentHour
-    currentHour = h
+    currentHour = datetime.now().hour
+    SetData()
 
 
 def GetHour():
