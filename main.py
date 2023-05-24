@@ -2,9 +2,11 @@ from flask import Flask
 from flask_session import Session
 import os
 import sys
-from Services.Price.PriceController import SetData, SetHour
+from Services.Price.PriceController import SetData, SetHour, SetupNewData
 from datetime import datetime
+from Services.Scheduler.scheduler import newSchedule
 
+newSchedule(5, 2, SetupNewData)
 #Temporary for now
 SetHour(datetime.now().hour)
 SetData()
