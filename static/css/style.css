@@ -84,6 +84,5 @@ td.buyButton:active{
     padding: 4rem;
     background-color: #cccccc;
     background-clip: padding-box;
-    border-width: 0rem 2rem 2rem 2rem;
-    border-style: dashed;
+    margin: 0 2rem 2rem 2rem;
 }
