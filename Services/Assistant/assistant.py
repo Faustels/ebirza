@@ -1,5 +1,6 @@
 import random
 from unidecode import unidecode
+from Services.Price.PriceController import GetData
 
 # list for greetings
 g1 = [
@@ -61,9 +62,9 @@ q6 = [
 
 
 a1 = [
-    ["Elektros kaina Lietuvoje yra ", ", jei norite sužinoti daugiau, spauskite <a href='kaina'>čia.</a>"],
-    ["Elektros kaina Lietuvoje dabar yra ", ", jei norite sužinoti daugiau, spauskite <a href='kaina'>čia.</a>"],
-    ["Prognozuojama elektros kaina dabar yra ", ", jei norite sužinoti daugiau, spauskite <a href='kaina'>čia.</a>"]
+    ["Elektros kaina Lietuvoje yra ", " €/mWh. Jei norite sužinoti daugiau, spauskite <a href='kaina'>čia.</a>"],
+    ["Elektros kaina Lietuvoje dabar yra ", " €/mWh. Jei norite sužinoti daugiau, spauskite <a href='kaina'>čia.</a>"],
+    ["Prognozuojama elektros kaina dabar yra ", " €/mWh. Jei norite sužinoti daugiau, spauskite <a href='kaina'>čia.</a>"]
 
 ]
 
@@ -97,7 +98,10 @@ def list_Ai():
 
 def list_Ci():
     X4 = a1[random.randint(0, 2)]
-    return X4
+    temp, price = GetData(0)
+    ans = X4[0] + "{:.2f}" + X4[1]
+    ans = ans.format(price)
+    return ans
 
 
 def list_Di():
