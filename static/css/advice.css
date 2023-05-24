@@ -1,29 +1,5 @@
 :root{
-    --textSize: 10px;
-}
-
-@media (min-width: 768px){
-    :root {
-        --textSize: 11px;
-    }
-}
-
-@media (min-width: 992px){
-    :root {
-        --textSize: 14px;
-    }
-}
-
-@media (min-width: 1200px){
-    :root {
-        --textSize: 15px;
-    }
-}
-
-@media (min-width: 1366px){
-    :root {
-        --textSize: 16px;
-    }
+    --textSize: 16px;
 }
 
 .adviceContainer{

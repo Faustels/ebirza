@@ -4,13 +4,13 @@
 
 @media (min-width: 576px){
     :root {
-        --textSize: 12px;
+        --textSize: 14px;
     }
 }
 
 @media (min-width: 768px){
     :root {
-        --textSize: 10px;
+        --textSize: 12px;
     }
 }
 

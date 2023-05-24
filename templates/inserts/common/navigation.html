@@ -6,7 +6,7 @@
 {% endif %}
 
 <div>
-    <nav class="navbar navbar-expand-lg navigationBar">
+    <nav class="navbar navbar-expand-xl navigationBar">
         <a href="/">
             <div class="navbar-brand">
                 <img class="logo" src="/static/images/logo.png" alt="logo">
@@ -41,6 +41,11 @@
                     </li>
                 </div>
                 {% else %}
+                <div>
+                    <li class="nav-item">
+                        <a href="pagrindinis" class="navbarPageLinks"> TARPININKAVIMAS </a>
+                    </li>
+                </div>
                 <div>
                     <li class="nav-item">
                         <button type="button" class="navbarButton" onclick="return logout()">
