@@ -1,0 +1,27 @@
+.navigationBar {
+    background-color: var(--light-green-color);
+    padding: 1rem 3rem;
+}
+
+.navbarPageLinks {
+    color: var(--dark-green-color);
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.navbarList div {
+    padding: 1.5rem 2.5rem;
+}
+
+.navbarButton {
+    background-color: transparent;
+    border-width: 0;
+    color: var(--dark-green-color);
+    font-weight: bold;
+    padding: 0;
+}
+
+.logo {
+    height:3rem;
+    width: auto;
+}

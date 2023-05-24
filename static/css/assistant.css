@@ -1,0 +1,102 @@
+.assistantUserMessage {
+    align-self: flex-end;
+    background-color: var(--medium-green-color);
+    color:white;
+    margin: 0.5rem 0.5rem 1rem 1.5rem;
+}
+
+.assistantBotMessage {
+    background-color: lightgray;
+    margin: 0.5rem 1.5rem 1rem 0.5rem;
+}
+
+.assistantMessage{
+    padding: 0.5rem;
+    border-radius: 15px;
+    width: fit-content;
+    word-wrap: break-word;
+    max-width:85%
+}
+
+.assistantMessageBox{
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height:25vh;
+    width:100%;
+    display:flex;
+    flex-direction:column;
+}
+
+.assistantMessageSend {
+    overflow:auto;
+    width: 100%;
+    display:flex;
+}
+
+.assistantTextBox {
+    flex-grow: 1;
+    height:2rem;
+    margin-right: 0.5rem;
+}
+
+.assistantSubmit {
+    width:fit-content;
+    height: 2rem;
+    border-width: 1px;
+    transition-duration: 100ms;
+}
+
+.assistantSubmit:hover{
+    background-color: var(--medium-green-color);
+    color: white;
+}
+
+.assistantBox{
+    background-color: white;
+    border-radius: 15px;
+    overflow: hidden;
+    display: none;
+}
+
+.assistantFunctions {
+    padding: 1rem;
+    border-style: solid;
+    border-width: 2px 0 0 0;
+    border-color: lightgrey;
+}
+
+.assistantBar {
+    background-color: var(--medium-green-color);
+    display: flex;
+    justify-content: flex-end;
+}
+
+.assistantExit {
+    border-width: 0;
+    background-color: var(--medium-green-color);
+    margin-right: 0.25rem;
+}
+
+.assistantExit:hover {
+    color:white;
+}
+
+.assistantContainer{
+    margin-right: 1rem;
+    position: fixed;
+    bottom: 10vh;
+    right: 0;
+    width: 20rem;
+    z-index: 2;
+}
+
+.assistantImageContainer {
+    display:flex;
+    justify-content: flex-end;
+}
+.assistantImage {
+    border-radius: 50%;
+    width:5rem;
+    height:5rem;
+    cursor: pointer;
+}

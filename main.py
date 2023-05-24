@@ -2,12 +2,10 @@ from flask import Flask
 from flask_session import Session
 import os
 import sys
-from Services.Price.PriceController import SetData, SetHour
+from Services.Price.PriceController import SetHour, SetupNewData
+from Services.Scheduler.scheduler import newSchedule
+from Services.Weather.WeatherAPI import PrepareWeatherAPI, UpdateData, GeneratePredictions
 from datetime import datetime
-
-#Temporary for now
-SetHour(datetime.now().hour)
-SetData()
 
 #Reading private configuration
 if not os.path.exists("privateConfig.ini"):
@@ -52,6 +50,11 @@ app.config['MYSQL_DB'] = database['MYSQL_DB']
 
 mysql.init_app(app)
 
+#Price setup
+SetupNewData()
+newSchedule(60 * 60 * 24, 2, SetupNewData)
+newSchedule(60 * 60, 2, SetHour)
+
 #Request setup
 from Blueprints.user import userBlueprint
 app.register_blueprint(userBlueprint)
@@ -67,6 +70,15 @@ app.register_blueprint(assistantBlueprint)
 from Blueprints.index import indexBlueprint
 app.register_blueprint(indexBlueprint)
 
+from Blueprints.about import aboutBlueprint
+app.register_blueprint(aboutBlueprint)
+
+from Blueprints.services import servicesBlueprint
+app.register_blueprint(servicesBlueprint)
+
+from Blueprints.advice import adviceBlueprint
+app.register_blueprint(adviceBlueprint)
+
 from Blueprints.main import mainBlueprint
 app.register_blueprint(mainBlueprint)
 
@@ -75,6 +87,10 @@ app.register_blueprint(oraiBlueprint)
 
 from Blueprints.price import priceBlueprint
 app.register_blueprint(priceBlueprint)
+
+from Blueprints.solar import solarBlueprint
+app.register_blueprint(solarBlueprint)
+
 
 if __name__ == "__main__":
     app.run()

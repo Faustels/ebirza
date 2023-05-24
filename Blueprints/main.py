@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, session, redirect, request
 from Services.Database.database import MySQLGet, MySQLExecute
 import threading
+from datetime import datetime
 
 lock = threading.Lock()
 moneyTaken = 0.02
@@ -103,6 +104,7 @@ def buyEnergy():
 
     amountBought = res[0]["amount"]
     price = amountBought * float(res[0]["price"])
+    now = datetime.now();
     if amountBought <= 0:
         lock.release()
         return [None]
@@ -119,6 +121,8 @@ def buyEnergy():
 
     newAmount = MySQLGet("select amount from consumer where id = %s", (consumerId,))[0]["amount"]
 
+    MySQLExecute("Insert into sales(buyer, seller, amount, date) values (%s, %s, %s, %s)",
+                              (consumerId, producerId, amountBought, now.strftime('%Y-%m-%d %H:%M:%S')))
     lock.release()
 
     return [newAmount]

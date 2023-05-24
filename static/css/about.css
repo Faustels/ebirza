@@ -1,0 +1,30 @@
+:root{
+    --textSize: 16px;
+}
+
+h1{
+    color: var(--medium-green-color);
+    font-weight: bold;
+    padding: 2vh 0;
+}
+
+.centerImage {
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    max-height: 100%;
+    max-width: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    object-fit: contain;
+}
+
+.aboutContainer{
+    color: var(--dark-green-color);
+    padding:0 8vw 0 4vw;
+    text-align: justify;
+    font-size: calc(1.6 * var(--textSize));
+    line-height: 1.8;
+}

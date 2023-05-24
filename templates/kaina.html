@@ -4,7 +4,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link rel="stylesheet" type="text/css"    href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css"></link>
-    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/root.css">
+    <link rel="stylesheet" href="/static/css/kaina.css">
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <title>Title</title>
 </head>
@@ -23,8 +24,8 @@
     </div>
 </div>
 
-<div class="row mapStatisticContainer">
-    <div class="col-sm-4" style="background-color:dodgerblue">
+<div class="row numberContainer justify-content-around">
+    <div class="col-sm-4 numberBox">
         <div>
             <p>Jūsų namų ūkiui siūloma kaina</p>
             <h3 id="priceDisplay"></h3>
@@ -33,7 +34,7 @@
             <i class="icon bi-hand-thumbs-up"></i>
         </div>
     </div>
-    <div class="col-sm-4" style="background-color:dodgerblue">
+    <div class="col-sm-4 numberBox">
         <div>
             <p>Jūsų namų ūkio elektros suvarotjimo perteklius</p>
             <h3 id="excessLabel">0 kWh</h3>
@@ -87,7 +88,7 @@
                     title: 'Kaina'
                 },
                 hAxis: {
-                    title: 'Kiekis (mWh)'
+                    title: 'Kiekis (MWh)'
                 },
                 interpolateNulls: true,
             };
@@ -99,7 +100,7 @@
     }
 
     function setPrice(price){
-        $("#priceDisplay")[0].innerHTML = price.toString() + " €/mWh"
+        $("#priceDisplay")[0].innerHTML = price.toString() + " €/MWh"
     }
 
     function updateProduceLabel(){

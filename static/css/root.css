@@ -1,0 +1,19 @@
+@import url(navbar.css);
+@import url(footer.css);
+@import url(assistant.css);
+@import url(userModals.css);
+:root {
+    --dark-green-color:#347571;
+    --medium-green-color:#5EC57E;
+    --light-green-color: #ECF8E5;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+.row{
+    margin-left: 0px;
+    margin-right: 0px;
+}
+

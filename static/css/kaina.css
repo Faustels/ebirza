@@ -1,0 +1,14 @@
+.icon {
+    position:absolute;
+    top:0;
+    bottom: 1.25rem;
+    right: 0.25rem;
+    font-size:3rem;
+}
+
+.numberBox{
+    background-color: var(--medium-green-color);
+}
+
+.numberContainer{
+}

@@ -1,18 +1,32 @@
 import subprocess
+import shutil
+import requests
+from datetime import datetime
 
 CREATE_NO_WINDOW = 0x08000000
 
 currentHour = 0
 data = []
 
+def DownloadData():
+    date = datetime.now();
+    link = "https://www.nordpoolgroup.com/49b771/globalassets/download-center-market-data/mcp_data_report_" + date.strftime("%d-%m-%Y")+ "-00_00_00.xlsx"
+    response = requests.get(link, stream=True)
+    with open("Services/Price/duom.xlsx", "wb") as out_file:
+        shutil.copyfileobj(response.raw, out_file)
 
 def CreateData():
-    subprocess.call("Rscript Price.R", stdout=subprocess.DEVNULL, creationflags=CREATE_NO_WINDOW)
+    subprocess.Popen(("Rscript",  "Price.R"), cwd ="Services/Price", stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
+def SetupNewData():
+    DownloadData()
+    CreateData()
+    SetHour()
 
-def SetHour(h):
+def SetHour():
     global currentHour
-    currentHour = h
+    currentHour = datetime.now().hour
+    SetData()
 
 
 def GetHour():

@@ -1,0 +1,26 @@
+:root{
+    --size: 150px;
+}
+
+@media (min-width: 1366px){
+    :root {
+        --size: 200px;
+    }
+}
+
+td.buyButton:hover{
+    background-color: var(--medium-green-color);
+    color: white;
+    cursor: pointer;
+}
+
+td.buyButton:active{
+    background-color: var(--dark-green-color) !important;
+}
+
+.map {
+    width: calc(var(--size) * 2);
+    height: calc(var(--size) * 1.5);
+    margin:auto;
+    z-index:1;
+}

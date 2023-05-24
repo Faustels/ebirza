@@ -1,0 +1,25 @@
+:root{
+    --textSize: 16px;
+}
+
+.adviceContainer{
+    color: var(--dark-green-color);
+    padding:2vh 6vw;
+    text-align: justify;
+    font-size: calc(1.3 * var(--textSize));
+    line-height: 1.8;
+    text-indent: calc(2 *var(--textSize));
+}
+
+.listContainer{
+    padding: 3vh 7vw;
+    text-indent: 0;
+}
+
+.adviceImage{
+    position: fixed;
+    bottom: 15vh;
+    right: 0;
+    z-index: -10000;
+    opacity: 0.4
+}

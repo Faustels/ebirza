@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+<link rel="stylesheet" type="text/css"    href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css"></link>
+<link rel="stylesheet" href="/static/css/root.css">
+<link rel="stylesheet" href="/static/css/advice.css">
+<title>Puslapis</title>
+</head>
+<body class="d-flex flex-column min-vh-100">
+{% include "inserts/common/assistant.html" %}
+{% include "inserts/common/navigation.html" %}
+
+<div style="display:flex; flex-direction: column; flex-grow: 1;">
+    <div id="Apie_mus" class="row justify-content-lg-center adviceContainer">
+        <div class="row justify-content-lg-center" >
+            <div class="col col-12">
+                <div>
+                    Tobulėjant technologijoms atsiranda vis daugiau būdų kaip taupyti energiją, nuo modernių energiją taupančių prietaisų iki paprasto
+įpročio atjungti prietaisus kai jų nenaudojame. Būdų taupyti elektros energiją yra daug, todėl šiame puslapyje pateiksime tik kelis
+pagrindinius patarimus, kuriais vadovaujantis galėsite sumažinti savo energijos sąskaitą.
+                </div>
+                <ol class="listContainer">
+                    <li>
+                        <i><b>Pakeiskite senas lemputes į energiją taupančias LED lemputes.</b> LED lemputės yra daug efektyvesnės
+                        ir ilgaamžiškesnės nei tradicinės lemputės.</i>
+                    </li>
+                    <li>
+                        <i><b>Atjunkite elektroninius prietaisus iš tinklo, kai jų nenaudojate.</b> Net jei jie yra išjungti, jie vis tiek gali vartoti
+                        energiją. Kai kurie prietaisai, tokie kaip televizoriai arba kompiuteriai, turi režimus, kurie leidžia jums juos
+                        visiškai išjungti neatjungiant jų nuo tinklo. Todėl verta patikrinti, ar jūsų turimi prietaisai turi šią funkciją.</i>
+                    </li>
+                    <li>
+                        <i><b>Naudokite laikmačius ar kitus automatinius įrenginius, kad būtų galima valdyti šildymo ir aušinimo sistemų
+                        darbą.</b> Tai padės jums vartoti energiją tik tada, kai reikia, o ne visą parą.</i>
+                    </li>
+                    <li>
+                        <i><b>Įdiekite automatinius elektros energijos išsijungimo jungiklius virtuvėje, vonios kambaryje ir kitose
+                        patalpose.</b> Tai užtikrins, kad jūsų prietaisai nebus įjungti per ilgai, kai jų nenaudojate.</i>
+                    </li>
+                    <li>
+                        <i><b>Pirkdami naujus buitinius prietaisus atsižvelkite į jų efektyvumo lygį.</b> Įvertinkite ne tik prietaiso kainą
+                        parduotuvėje, bet ir galimas jo sąnaudas, tokiu būdu gausite tikrąją prietaiso kainą.</i>
+                    </li>
+                </ol>
+                <div>
+                    Nebūtina naudotis visais šiais patarimais, kadangi kiekvienas iš jų gali padėti sumažinti energijos sąnaudas.
+Prisiminkite – vienas nemokamas įprotis, gali ženkliai sumažinti išlaidas.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <img class="adviceImage" src="/static/images/advice.png" alt="advice.png">
+</div>
+
+{% include "inserts/common/footer.html" %}
+
+</body>
+{% include "inserts/common/scripts.html" %}
+</html>

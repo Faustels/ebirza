@@ -1,0 +1,33 @@
+footer{
+    color: var(--medium-green-color);
+}
+
+.footerContainer {
+    background-color: var(--light-green-color);
+    padding: 0 0 4vh 0;
+}
+
+.footerData{
+    font-size: 150%;
+}
+
+.footerDataTitle{
+    color: black;
+}
+
+.footerTitle{
+    font-size: 200%;
+}
+
+.footerTitleContainer{
+    padding: 2vh 0;
+}
+
+.roundedTop{
+    min-height: 4vh;
+    z-index:-1000;
+    border-radius: 100% 100% 0 0;
+    position:relative;
+    top: 2vh;
+    background-color: var(--light-green-color);
+}

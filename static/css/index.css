@@ -1,0 +1,77 @@
+:root{
+    --textSize: 10px;
+}
+
+@media (min-width: 576px){
+    :root {
+        --textSize: 14px;
+    }
+}
+
+@media (min-width: 768px){
+    :root {
+        --textSize: 12px;
+    }
+}
+
+@media (min-width: 992px){
+    :root {
+        --textSize: 12px;
+    }
+}
+
+@media (min-width: 1200px){
+    :root {
+        --textSize: 14px;
+    }
+}
+
+@media (min-width: 1366px){
+    :root {
+        --textSize: 16px;
+    }
+}
+
+.centerImage {
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    max-height: 100%;
+    max-width: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    object-fit: contain;
+}
+
+.bigText{
+    font-size: calc(4 * var(--textSize));
+    color: var(--dark-green-color);
+    padding: 0 3vw;
+    text-align:left;
+}
+
+.registerButton {
+    font-size: calc(2 * var(--textSize));
+    background-color: var(--medium-green-color);
+    color: white;
+    padding: 0 5vw 0.5vh 5vw;
+    margin: auto;
+    border-radius: calc(5 * var(--textSize));
+    border-width: 0;
+}
+
+.indexContainer{
+    background-color: var(--light-green-color);
+    padding:0 7vw
+}
+
+.roundedBottom{
+    background-color: var(--light-green-color);
+    border-radius: 0 0 100% 100%;
+    height: 15vh;
+    positon:relative;
+    top: -7.5vh;
+    z-index: -1000;
+}

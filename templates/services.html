@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+<link rel="stylesheet" type="text/css"    href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css"></link>
+<link rel="stylesheet" href="/static/css/root.css">
+<link rel="stylesheet" href="/static/css/services.css">
+<title>Puslapis</title>
+</head>
+<body class="d-flex flex-column min-vh-100">
+{% include "inserts/common/assistant.html" %}
+{% include "inserts/common/navigation.html" %}
+
+<div style="display:flex; flex-direction: column; flex-grow: 1;">
+    <div id="Apie_mus" class="row justify-content-lg-center aboutContainer">
+        <div class="row justify-content-lg-center" servicesContainer>
+            <div class="col col-xl-4 col-lg-4 col-12 singleServiceContainer">
+                {% if user is not defined: %}
+                <a class="singleServiceLink">
+                {% else: %}
+                <a href="pagrindinis" class="singleServiceLink">
+                {% endif %}
+                    <div class="row">
+                        <div class="col col-xl-12 col-lg-12 col-4 serviceImageContainer">
+                            <img class="serviceImage" src="/static/images/sell.png" alt="sell.png">
+                        </div>
+                        <div class="col col-xl-12 col-lg-12 col-8">
+                            <h1>Tarpininkavimas</h1>
+                            <div class="serviceDescription">
+                                Mūsų platforma atlieka tarpinko vaidmenį, suvesdama norinčius
+                                pirkti ir parduoti saulės energijos perteklių klientus.
+                                {% if user is not defined: %}
+                                (Registracija privaloma)
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col col-xl-4 col-lg-4 col-12 singleServiceContainer" style="background-color: #ECF8E5;">
+                <a href="kaina" class="singleServiceLink">
+                    <div class="row">
+                        <div class="col col-xl-12 col-lg-12 col-4 serviceImageContainer">
+                            <img class="serviceImage" src="/static/images/price.png" alt="price.png">
+                        </div>
+                        <div class="col col-xl-12 col-lg-12 col-8 serviceText">
+                            <h1>Elektros kainos stebėjimas</h1>
+                            <div class="serviceDescription">
+                                Svetainėje įdiegtas realaus laiko elektros kainos stebėjimo
+                                algoritmas leidžia įsivertinti norimo parduoti pertekliaus kainą.
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col col-xl-4 col-lg-4 col-12 singleServiceContainer" style="background-color: #DCF4CE;">
+                <a href="spinduliuote" class="singleServiceLink">
+                    <div class="row">
+                        <div class="col col-xl-12 col-lg-12 col-4 serviceImageContainer">
+                            <img class="serviceImage" src="/static/images/sun.png" alt="sun.png">
+                        </div>
+                        <div class="col col-xl-12 col-lg-12 col-8">
+                            <h1>Pagaminamos saulės energijos prognozavimas</h1>
+                            <div class="serviceDescription">
+                                Svetainėje įdiegtas įrankis leis Jums stebėti kiek saulės energijos
+                                prognozuojama pagaminti pagal tos dienos orus bei vietovę, kurioje esate.
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include "inserts/common/footer.html" %}
+
+</body>
+{% include "inserts/common/scripts.html" %}
+</html>

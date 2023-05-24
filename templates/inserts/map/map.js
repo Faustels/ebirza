@@ -51,6 +51,8 @@ function SetColors(values) {
     }
 
     for (let key in values) {
+        console.log(key)
+        console.log($("#" + key)[0])
         $("#" + key)[0].style.fill = getColor((values[key] - min) / (max - min))
     }
 }
