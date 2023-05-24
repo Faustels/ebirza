@@ -2,7 +2,6 @@ import subprocess
 import shutil
 import requests
 from datetime import datetime
-import os
 
 CREATE_NO_WINDOW = 0x08000000
 
